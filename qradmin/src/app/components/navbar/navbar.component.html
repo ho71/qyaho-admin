@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="/">Qyaho은행 사업자전용</a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li *ngIf="!checkLoggedIn()" class="nav-item">
+        <a class="nav-link" routerLink="/business">사업자 회원가입</a>
+      </li>
+
+      <li *ngIf="!checkLoggedIn()" class="nav-item">
+        <a class="nav-link" routerLink="/businesslogin">사업자 로그인</a>
+      </li>
+
+      <li *ngIf="checkLoggedIn()" class="nav-item">
+        <a class="nav-link" routerLink="/Customer_list">회원 목록 관리</a>
+      </li>
+
+      <li *ngIf="checkLoggedIn()" class="nav-item">
+        <a class="nav-link" routerLink="/Customer_Num">대기 순번 관리</a>
+      </li>
+
+      <li *ngIf="checkLoggedIn()" class="nav-item">
+        <a class="nav-link" routerLink="/qrscan">QRSCAN</a>
+      </li>
+
+      <li *ngIf="checkLoggedIn()" class="nav-item">
+        <a class="nav-link" (click)="onLogoutClick()" href="#">로그아웃</a>
+      </li>
+    </ul>
+  </div>
+</nav>

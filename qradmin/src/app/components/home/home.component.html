@@ -1,0 +1,79 @@
+<style type="text/css">
+  .blank {
+    height: 150px;
+  }
+</style>
+
+<br />
+<div *ngIf="!checkLoggedIn()" style="text-align: center; vertical-align: top">
+  <h4 class="comment">아직 계정이 없으신가요?</h4>
+  <h3 class="comment1">계정이 있으시면 로그인하세요!</h3>
+  <br />
+
+  <button
+    *ngIf="!checkLoggedIn()"
+    type="button"
+    class="btn btn-primary"
+    routerLink="/business"
+  >
+    사업자 회원 가입
+  </button>
+  &nbsp;
+  <button
+    *ngIf="!checkLoggedIn()"
+    type="button"
+    style="text-align: center; vertical-align: top"
+    class="btn btn-primary"
+    type="button"
+    routerLink="/businesslogin"
+  >
+    사업자 로그인
+  </button>
+  &nbsp;
+  <br />
+</div>
+<br />
+<div
+  *ngIf="checkLoggedIn()"
+  style="
+    text-align: center;
+    vertical-align: top;
+    border: 1px solid peachpuff;
+    border-radius: 60px;
+    padding-top: 10px;
+    background-color: peachpuff;
+  "
+>
+  <h1 style="padding-top: 10px; padding-bottom: 10px">
+    어서오세요! Qyaho 은행입니다.
+  </h1>
+</div>
+<br />
+<div
+  *ngIf="checkLoggedIn()"
+  style="
+    text-align: center;
+    vertical-align: top;
+    border: 1px solid peachpuff;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: peachpuff;
+  "
+>
+  <button type="button" class="btn btn-primary" routerLink="/qrscan">
+    대기 순번 등록
+  </button>
+  &nbsp;
+  <button class="btn btn-primary" type="button" routerLink="/qrscan">
+    대기 순번 서비스 제공
+  </button>
+
+  <h2 class="waitpeople">현재 대기자 수는 {{ customersQuantity }}명 입니다.</h2>
+  <h2 class="waitpeople">
+    예상 대기 시간은 {{ customersQuantity * 5 }}분 입니다.
+  </h2>
+</div>
+<br />
+<div>
+  <app-pic-slide></app-pic-slide>
+</div>
