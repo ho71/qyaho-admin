@@ -130,7 +130,7 @@ export class QrscanComponent {
 
   openDialog(qrcode: QRCode) {
     const dialogRef = this.dialog.open(DialogComponent, {
-      width: '800px',
+      width: '500px',
       data: { qrcode: qrcode },
     });
 
