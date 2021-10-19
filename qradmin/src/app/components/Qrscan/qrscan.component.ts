@@ -4,7 +4,6 @@ import { DialogComponent } from '../dialog/dialog.component';
 
 import { MatDialog } from '@angular/material/dialog';
 import { CustomerNumService } from '../../services/customers_num.service';
-import { Cus_num } from '../../models/cus.num';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -18,8 +17,6 @@ export class QrscanComponent {
 
   stream: MediaStream | undefined;
 
-  customers: Cus_num[] = [];
-  customersQuantity: number = 0;
 
   constructor(
     private customer1Service: CustomerNumService,
@@ -115,8 +112,6 @@ export class QrscanComponent {
           icon: 'success',
           confirmButtonText: '확인',
         });
-        this.customers.push(values);
-        this.customersQuantity = this.customersQuantity + 1;
       } else {
         Swal.fire({
           title: data.title,
@@ -130,7 +125,7 @@ export class QrscanComponent {
 
   openDialog(qrcode: QRCode) {
     const dialogRef = this.dialog.open(DialogComponent, {
-      width: '500px',
+      width: '400px',
       data: { qrcode: qrcode },
     });
 
@@ -138,11 +133,6 @@ export class QrscanComponent {
       if (this.isActive()) {
         this.processImage();
         this.manageSubmit(qrcode.data);
-
-        // this.qradd.addCustomerNum1().subscribe((data) => {
-        //   return this.customers.push(data);
-        // });
-        // this.customersQuantity = this.customersQuantity + 1
       }
     });
   }

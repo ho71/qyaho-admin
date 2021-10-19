@@ -1,23 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 
-import { Cus_num } from "../../models/cus.num"
-import { CustomerNumService } from "../../services/customers_num.service";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-
+import { Cus_num } from '../../models/cus.num';
+import { CustomerNumService } from '../../services/customers_num.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
-
-
 export class HomeComponent implements OnInit {
   business = Object;
-  
   customers: Cus_num[] = [];
   customersQuantity: number = 0;
 
@@ -25,36 +20,39 @@ export class HomeComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private customer1Service: CustomerNumService
-  ) {
-    this.customer1Service.getCustomerNums().subscribe((data) => {
-      this.customers = data;
-      this.customersQuantity = data.length;
-    });
-   }
+  ) {}
 
+  ngOnInit() {
+    this.authService.getProfile().subscribe(
+      (profile) => {
+        this.business = profile.user;
+      },
+      (err) => {
+        console.log(err);
+        return false;
+      }
+    );
 
-
-   ngOnInit() {
-        this.authService.getProfile().subscribe(profile => {
-          this.business= profile.user;
-        }, err => {
-          console.log(err);
-          return false;
-        });
-    
+    setInterval(() => {
+      this.customer1Service.getCustomerNums().subscribe((data) => {
+        this.customers = data;
+        this.customersQuantity = data.length;
+        console.log(this.customers);
+      });
+    }, 1000);
   }
 
   onLogoutClick() {
     this.authService.logout();
     Swal.fire({
-      title: "로그아웃 성공! ",
-      icon: "success",
-      confirmButtonText: "확인",
+      title: '로그아웃 성공! ',
+      icon: 'success',
+      confirmButtonText: '확인',
     });
     this.router.navigate(['/login']);
     return false;
-   }
-   checkLoggedIn() {
+  }
+  checkLoggedIn() {
     return this.authService.loggedIn();
   }
 }

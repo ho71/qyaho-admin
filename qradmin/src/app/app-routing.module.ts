@@ -12,11 +12,12 @@ import { QrscanComponent } from './components/Qrscan/qrscan.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'navbar', component: NavbarComponent },
-  { path: 'Customer_Num', component: CustomerNumComponent},
-  { path: 'business', component: BusinessComponent},
+  { path: 'Customer_Num', component: CustomerNumComponent },
+  { path: 'business', component: BusinessComponent },
   { path: 'businesslogin', component: BusinessloginComponent },
-  { path: 'Customer_list', component: CustomerListComponent},
-  { path: 'qrscan', component: QrscanComponent }
+  { path: 'Customer_list', component: CustomerListComponent },
+  { path: 'qrscan', component: QrscanComponent },
+  { path: '**', component: HomeComponent },
 ];
 
 @NgModule({

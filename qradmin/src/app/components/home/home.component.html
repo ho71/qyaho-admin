@@ -13,7 +13,7 @@
   <button
     *ngIf="!checkLoggedIn()"
     type="button"
-    class="btn btn-primary"
+    class="btn btn-dark"
     routerLink="/business"
   >
     사업자 회원 가입
@@ -23,7 +23,7 @@
     *ngIf="!checkLoggedIn()"
     type="button"
     style="text-align: center; vertical-align: top"
-    class="btn btn-primary"
+    class="btn btn-dark"
     type="button"
     routerLink="/businesslogin"
   >
@@ -38,10 +38,10 @@
   style="
     text-align: center;
     vertical-align: top;
-    border: 1px solid peachpuff;
+    border: 1px solid lightgrey;
     border-radius: 60px;
     padding-top: 10px;
-    background-color: peachpuff;
+    background-color: lightgrey;
   "
 >
   <h1 style="padding-top: 10px; padding-bottom: 10px">
@@ -54,24 +54,14 @@
   style="
     text-align: center;
     vertical-align: top;
-    border: 1px solid peachpuff;
+    border: 1px solid lightgrey;
     border-radius: 5px;
     padding: 10px;
-    background-color: peachpuff;
+    background-color: lightgrey;
   "
 >
-  <button type="button" class="btn btn-primary" routerLink="/qrscan">
-    대기 순번 등록
-  </button>
-  &nbsp;
-  <button class="btn btn-primary" type="button" routerLink="/qrscan">
-    대기 순번 서비스 제공
-  </button>
-
-  <h2 class="waitpeople">현재 대기자 수는 {{ customersQuantity }}명 입니다.</h2>
-  <h2 class="waitpeople">
-    예상 대기 시간은 {{ customersQuantity * 5 }}분 입니다.
-  </h2>
+  <h2>현재 대기자 수는 {{ customersQuantity }}명 입니다.</h2>
+  <h2>예상 대기 시간은 {{ customersQuantity * 5 }}분 입니다.</h2>
 </div>
 <br />
 <div>

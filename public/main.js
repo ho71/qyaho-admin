@@ -46,8 +46,6 @@ let QrscanComponent = class QrscanComponent {
     constructor(customer1Service, dialog) {
         this.customer1Service = customer1Service;
         this.dialog = dialog;
-        this.customers = [];
-        this.customersQuantity = 0;
     }
     toggleVideoMedia() {
         if (this.isActive()) {
@@ -125,8 +123,6 @@ let QrscanComponent = class QrscanComponent {
                     icon: 'success',
                     confirmButtonText: '확인',
                 });
-                this.customers.push(values);
-                this.customersQuantity = this.customersQuantity + 1;
             }
             else {
                 sweetalert2__WEBPACK_IMPORTED_MODULE_8___default.a.fire({
@@ -140,17 +136,13 @@ let QrscanComponent = class QrscanComponent {
     }
     openDialog(qrcode) {
         const dialogRef = this.dialog.open(_dialog_dialog_component__WEBPACK_IMPORTED_MODULE_5__["DialogComponent"], {
-            width: '500px',
+            width: '400px',
             data: { qrcode: qrcode },
         });
         dialogRef.afterClosed().subscribe((result) => {
             if (this.isActive()) {
                 this.processImage();
                 this.manageSubmit(qrcode.data);
-                // this.qradd.addCustomerNum1().subscribe((data) => {
-                //   return this.customers.push(data);
-                // });
-                // this.customersQuantity = this.customersQuantity + 1
             }
         });
     }
@@ -317,7 +309,7 @@ BusinessComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("    <br>\n    <h1 class=\"text-center\">회원 목록 </h1>\n    <div>\n      <div class=\"text-right mt-6\">\n        <p class=\"text-success\">회원 수: {{ customersQuantity }}</p>\n      </div>\n      <table class=\"table\">\n        <thead class=\"thead-dark\">\n          <tr class=\"text-center\">\n            <th scope=\"col\">이름</th>\n            <th scope=\"col\">ID</th>\n            <th scope=\"col\">이메일</th>\n            <th scope=\"col\">생일</th>\n        <th scope=\"col\">회원 삭제</th>\n          </tr>\n        </thead>\n\n        <tbody>\n          <tr *ngFor=\"let customer of customers\">\n            <td class=\"text-center\" style=\"width: 20%;\">\n              <h5>{{ customer.name }}</h5>\n            </td>\n            <td class=\"text-center\" style=\"width: 20%;\">\n                <h5>{{ customer.username }}</h5>\n              </td>\n            <td class=\"text-center\" style=\"width: 20%;\">\n              <h5>{{ customer.email }}</h5>\n            </td>\n            <!-- <td class=\"text-center\" style=\"width: 20%;\">\n              <h5>{{ customer.password }}</h5>\n            </td> -->\n            <td class=\"text-center\" style=\"width: 20%;\">\n                <h5>{{ customer.birth }}</h5>\n              </td>\n\n            <td class=\"text-center\" style=\"width: 10%;\">\n              <button (click)=\"deleteCustomer(customer._id)\" class=\"btn btn-danger\">삭제</button>\n            </td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n\n\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<br />\n<h1 class=\"text-center\">회원 목록</h1>\n<div>\n  <div class=\"text-right mt-6\">\n    <p class=\"text-success\">회원 수: {{ customersQuantity }}</p>\n  </div>\n  <table class=\"table\">\n    <thead class=\"thead-dark\">\n      <tr class=\"text-center\">\n        <th scope=\"col\">이름</th>\n        <th scope=\"col\">ID</th>\n        <th scope=\"col\">이메일</th>\n        <th scope=\"col\">생일</th>\n        <th scope=\"col\">회원 삭제</th>\n      </tr>\n    </thead>\n\n    <tbody>\n      <tr *ngFor=\"let customer of customers\">\n        <td class=\"text-center\" style=\"width: 20%\">\n          <h5>{{ customer.name }}</h5>\n        </td>\n        <td class=\"text-center\" style=\"width: 20%\">\n          <h5>{{ customer.username }}</h5>\n        </td>\n        <td class=\"text-center\" style=\"width: 20%\">\n          <h5>{{ customer.email }}</h5>\n        </td>\n        <!-- <td class=\"text-center\" style=\"width: 20%;\">\n              <h5>{{ customer.password }}</h5>\n            </td> -->\n        <td class=\"text-center\" style=\"width: 20%\">\n          <h5>{{ customer.birth }}</h5>\n        </td>\n\n        <td class=\"text-center\" style=\"width: 10%\">\n          <button (click)=\"deleteCustomer(customer._id)\" class=\"btn btn-danger\">\n            삭제\n          </button>\n        </td>\n      </tr>\n    </tbody>\n  </table>\n</div>\n");
 
 /***/ }),
 
@@ -343,7 +335,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<br>\n<h2 class=\"page-header\">Qyaho 사업자 로그인</h2>\n<br>\n<form (ngSubmit) = \"onLoginSubmit()\">\n    <div class=\"form-group\">\n        <label>ID</label>\n        <input type=\"text\" class=\"form-control\" name=\"username\" [(ngModel)]=\"username\">\n    </div>\n    <br>\n    <div class=\"form-group\">\n        <label>비밀번호</label>\n        <input type=\"password\" class=\"form-control\" name=\"password\" [(ngModel)]=\"password\">\n    </div>\n    <br>\n    <div class=\"form-group\">\n        <label>사업자 번호(번호만 입력하세요.)</label>\n        <input type=\"text\" class=\"form-control\" name=\"licenseNum\" [(ngModel)]=\"licenseNum\">\n    </div>\n    <input type=\"submit\" class=\"btn btn-primary\" value=\"Login\">\n</form>");
+/* harmony default export */ __webpack_exports__["default"] = ("<br />\n<h2 class=\"page-header\">Qyaho 사업자 로그인</h2>\n<br />\n<form (ngSubmit)=\"onLoginSubmit()\">\n  <div class=\"form-group\">\n    <label>ID</label>\n    <input\n      type=\"text\"\n      class=\"form-control\"\n      name=\"username\"\n      [(ngModel)]=\"username\"\n    />\n  </div>\n  <br />\n  <div class=\"form-group\">\n    <label>비밀번호</label>\n    <input\n      type=\"password\"\n      class=\"form-control\"\n      name=\"password\"\n      [(ngModel)]=\"password\"\n    />\n  </div>\n  <br />\n  <div class=\"form-group\">\n    <label>사업자 번호(번호만 입력하세요.)</label>\n    <input\n      type=\"text\"\n      class=\"form-control\"\n      name=\"licenseNum\"\n      [(ngModel)]=\"licenseNum\"\n    />\n  </div>\n  <input type=\"submit\" class=\"btn btn-dark\" value=\"Login\" />\n</form>\n");
 
 /***/ }),
 
@@ -377,30 +369,29 @@ let BusinessloginComponent = class BusinessloginComponent {
         this.authService = authService;
         this.router = router;
     }
-    ngOnInit() {
-    }
+    ngOnInit() { }
     onLoginSubmit() {
         const businesslogin = {
             username: this.username,
             password: this.password,
-            licenseNum: this.licenseNum
+            licenseNum: this.licenseNum,
         };
-        this.authService.authenticatebusiness(businesslogin).subscribe(data => {
+        this.authService.authenticatebusiness(businesslogin).subscribe((data) => {
             if (data.success) {
                 this.authService.storeUserData(data.token, data.userNoPW);
                 sweetalert2__WEBPACK_IMPORTED_MODULE_6___default.a.fire({
-                    title: "로그인 성공! ",
-                    icon: "success",
-                    confirmButtonText: "확인",
+                    title: '로그인 성공! ',
+                    icon: 'success',
+                    confirmButtonText: '확인',
                 });
                 this.router.navigate(['']);
             }
             else {
                 sweetalert2__WEBPACK_IMPORTED_MODULE_6___default.a.fire({
-                    title: "로그인 실패! ",
+                    title: '로그인 실패! ',
                     text: data.msg,
-                    icon: "error",
-                    confirmButtonText: "확인",
+                    icon: 'error',
+                    confirmButtonText: '확인',
                 });
                 this.router.navigate(['/businesslogin']);
             }
@@ -511,11 +502,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _raw_loader_home_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./home.component.html */ "tXZI");
 /* harmony import */ var _home_component_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./home.component.scss */ "zPH0");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/auth.service */ "lGQG");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "tyNb");
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! sweetalert2 */ "PSD3");
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _services_customers_num_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../services/customers_num.service */ "Zfc8");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! sweetalert2 */ "PSD3");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _services_customers_num_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../services/customers_num.service */ "Zfc8");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../services/auth.service */ "lGQG");
 
 
 
@@ -532,25 +523,28 @@ let HomeComponent = class HomeComponent {
         this.business = Object;
         this.customers = [];
         this.customersQuantity = 0;
-        this.customer1Service.getCustomerNums().subscribe((data) => {
-            this.customers = data;
-            this.customersQuantity = data.length;
-        });
     }
     ngOnInit() {
-        this.authService.getProfile().subscribe(profile => {
+        this.authService.getProfile().subscribe((profile) => {
             this.business = profile.user;
-        }, err => {
+        }, (err) => {
             console.log(err);
             return false;
         });
+        setInterval(() => {
+            this.customer1Service.getCustomerNums().subscribe((data) => {
+                this.customers = data;
+                this.customersQuantity = data.length;
+                console.log(this.customers);
+            });
+        }, 1000);
     }
     onLogoutClick() {
         this.authService.logout();
-        sweetalert2__WEBPACK_IMPORTED_MODULE_6___default.a.fire({
-            title: "로그아웃 성공! ",
-            icon: "success",
-            confirmButtonText: "확인",
+        sweetalert2__WEBPACK_IMPORTED_MODULE_5___default.a.fire({
+            title: '로그아웃 성공! ',
+            icon: 'success',
+            confirmButtonText: '확인',
         });
         this.router.navigate(['/login']);
         return false;
@@ -560,9 +554,9 @@ let HomeComponent = class HomeComponent {
     }
 };
 HomeComponent.ctorParameters = () => [
-    { type: _services_auth_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"] },
-    { type: _services_customers_num_service__WEBPACK_IMPORTED_MODULE_7__["CustomerNumService"] }
+    { type: _services_auth_service__WEBPACK_IMPORTED_MODULE_7__["AuthService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
+    { type: _services_customers_num_service__WEBPACK_IMPORTED_MODULE_6__["CustomerNumService"] }
 ];
 HomeComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
@@ -705,7 +699,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">\n  <a class=\"navbar-brand\" href=\"/\">Qyaho은행 사업자전용</a>\n  <button\n    class=\"navbar-toggler\"\n    type=\"button\"\n    data-toggle=\"collapse\"\n    data-target=\"#navbarSupportedContent\"\n    aria-controls=\"navbarSupportedContent\"\n    aria-expanded=\"false\"\n    aria-label=\"Toggle navigation\"\n  >\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n    <ul class=\"navbar-nav ml-auto\">\n      <li *ngIf=\"!checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/business\">사업자 회원가입</a>\n      </li>\n\n      <li *ngIf=\"!checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/businesslogin\">사업자 로그인</a>\n      </li>\n\n      <li *ngIf=\"checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/Customer_list\">회원 목록 관리</a>\n      </li>\n\n      <li *ngIf=\"checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/Customer_Num\">대기 순번 관리</a>\n      </li>\n\n      <li *ngIf=\"checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/qrscan\">QRSCAN</a>\n      </li>\n\n      <li *ngIf=\"checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" (click)=\"onLogoutClick()\" href=\"#\">로그아웃</a>\n      </li>\n    </ul>\n  </div>\n</nav>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">\n  <a class=\"navbar-brand\" href=\"/\">Qyaho은행 사업자전용</a>\n  <button\n    class=\"navbar-toggler\"\n    type=\"button\"\n    data-toggle=\"collapse\"\n    data-target=\"#navbarSupportedContent\"\n    aria-controls=\"navbarSupportedContent\"\n    aria-expanded=\"false\"\n    aria-label=\"Toggle navigation\"\n  >\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n    <ul class=\"navbar-nav ml-auto\">\n      <li *ngIf=\"!checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/business\">사업자 회원가입</a>\n      </li>\n\n      <li *ngIf=\"!checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/businesslogin\">사업자 로그인</a>\n      </li>\n\n      <li *ngIf=\"checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/Customer_list\">회원 목록 관리</a>\n      </li>\n\n      <li *ngIf=\"checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/Customer_Num\">대기 순번 관리</a>\n      </li>\n\n      <li *ngIf=\"checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/qrscan\">대기 순번 등록</a>\n      </li>\n\n      <li *ngIf=\"checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/qrscan\">대기 서비스 제공</a>\n      </li>\n\n      <li *ngIf=\"checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" (click)=\"onLogoutClick()\" href=\"#\">로그아웃</a>\n      </li>\n    </ul>\n  </div>\n</nav>\n");
 
 /***/ }),
 
@@ -924,19 +918,19 @@ let CustomerNumComponent = class CustomerNumComponent {
     }
     deleteCustomer(id) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_5___default.a.fire({
-            title: "순번 삭제",
-            text: "정말로 순번을 삭제 하시겠습니까?",
-            icon: "warning",
+            title: '순번 삭제',
+            text: '정말로 순번을 삭제 하시겠습니까?',
+            icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: "#d33",
-            cancelButtonColor: "#3085d6",
-            confirmButtonText: "확인",
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: '확인',
         }).then((result) => {
             if (result.value) {
                 this.customer1Service.deleteCustomerNum(id);
                 this.customers = this.customers.filter((customer) => customer._id !== id);
                 this.customersQuantity = this.customersQuantity - 1;
-                sweetalert2__WEBPACK_IMPORTED_MODULE_5___default.a.fire("성공!", "예약이 취소 되었습니다.");
+                sweetalert2__WEBPACK_IMPORTED_MODULE_5___default.a.fire('성공!', '예약이 취소 되었습니다.');
             }
         });
     }
@@ -1169,10 +1163,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _models_User__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../models/User */ "vmXk");
 /* harmony import */ var _services_customers_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/customers.service */ "UrgT");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! sweetalert2 */ "PSD3");
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_7__);
-
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! sweetalert2 */ "PSD3");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_6__);
 
 
 
@@ -1181,9 +1173,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let CustomerListComponent = class CustomerListComponent {
-    constructor(customer1Service, _builder) {
+    constructor(customer1Service) {
         this.customer1Service = customer1Service;
-        this._builder = _builder;
         this.customers = [];
         this.selectedCustomer = new _models_User__WEBPACK_IMPORTED_MODULE_4__["User"]();
         this.customersQuantity = 0;
@@ -1198,14 +1189,13 @@ let CustomerListComponent = class CustomerListComponent {
         //   avatar: ["", Validators.required],
         // });
     }
-    ngOnInit() {
-    }
+    ngOnInit() { }
     _blankControls() {
-        this.customerForm.get("name").reset();
-        this.customerForm.get("email").reset();
-        this.customerForm.get("username").reset();
-        this.customerForm.get("password").reset();
-        this.customerForm.get("birth").reset();
+        this.customerForm.get('name').reset();
+        this.customerForm.get('email').reset();
+        this.customerForm.get('username').reset();
+        this.customerForm.get('password').reset();
+        this.customerForm.get('birth').reset();
     }
     manageSubmit(values) {
         if (this.selectedCustomer._id === undefined) {
@@ -1213,24 +1203,24 @@ let CustomerListComponent = class CustomerListComponent {
                 return this.customers.push(data);
             });
             this.customersQuantity = this.customersQuantity + 1;
-            sweetalert2__WEBPACK_IMPORTED_MODULE_7___default.a.fire({
-                title: "예약 성공! ",
-                icon: "success",
-                confirmButtonText: "Cool",
+            sweetalert2__WEBPACK_IMPORTED_MODULE_6___default.a.fire({
+                title: '예약 성공! ',
+                icon: 'success',
+                confirmButtonText: 'Cool',
             });
         }
         else {
             this.customer1Service.editCustomer(this.selectedCustomer._id, values);
             const index = this.customers.findIndex((user) => user._id === this.selectedCustomer._id);
-            this.customers[index].name = this.customerForm.get("first_name").value;
-            this.customers[index].email = this.customerForm.get("last_name").value;
-            this.customers[index].username = this.customerForm.get("email").value;
-            this.customers[index].password = this.customerForm.get("avatar").value;
-            this.customers[index].birth = this.customerForm.get("avatar").value;
-            sweetalert2__WEBPACK_IMPORTED_MODULE_7___default.a.fire({
-                title: "예약이 수정되었습니다!",
-                icon: "success",
-                confirmButtonText: "Cool",
+            this.customers[index].name = this.customerForm.get('first_name').value;
+            this.customers[index].email = this.customerForm.get('last_name').value;
+            this.customers[index].username = this.customerForm.get('email').value;
+            this.customers[index].password = this.customerForm.get('avatar').value;
+            this.customers[index].birth = this.customerForm.get('avatar').value;
+            sweetalert2__WEBPACK_IMPORTED_MODULE_6___default.a.fire({
+                title: '예약이 수정되었습니다!',
+                icon: 'success',
+                confirmButtonText: 'Cool',
             });
         }
         this.selectedCustomer = new _models_User__WEBPACK_IMPORTED_MODULE_4__["User"]();
@@ -1238,35 +1228,34 @@ let CustomerListComponent = class CustomerListComponent {
     }
     // 수정, 삭제
     deleteCustomer(id) {
-        sweetalert2__WEBPACK_IMPORTED_MODULE_7___default.a.fire({
-            title: "회원 삭제",
-            text: "정말로 회원을 삭제 하시겠습니까?",
-            icon: "warning",
+        sweetalert2__WEBPACK_IMPORTED_MODULE_6___default.a.fire({
+            title: '회원 삭제',
+            text: '정말로 회원을 삭제 하시겠습니까?',
+            icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: "#d33",
-            cancelButtonColor: "#3085d6",
-            confirmButtonText: "확인",
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: '확인',
         }).then((result) => {
             if (result.value) {
                 this.customer1Service.deleteCustomer(id);
                 this.customers = this.customers.filter((customer) => customer._id !== id);
                 this.customersQuantity = this.customersQuantity - 1;
-                sweetalert2__WEBPACK_IMPORTED_MODULE_7___default.a.fire("성공!", "회원을 정상적으로 삭제했습니다.", "success");
+                sweetalert2__WEBPACK_IMPORTED_MODULE_6___default.a.fire('성공!', '회원을 정상적으로 삭제했습니다.', 'success');
             }
         });
     }
     editCustomer(customer) {
         this.selectedCustomer = customer;
-        this.customerForm.get("first_name").setValue(this.selectedCustomer.name);
-        this.customerForm.get("last_name").setValue(this.selectedCustomer.email);
-        this.customerForm.get("email").setValue(this.selectedCustomer.username);
-        this.customerForm.get("avatar").setValue(this.selectedCustomer.password);
-        this.customerForm.get("avatar").setValue(this.selectedCustomer.birth);
+        this.customerForm.get('first_name').setValue(this.selectedCustomer.name);
+        this.customerForm.get('last_name').setValue(this.selectedCustomer.email);
+        this.customerForm.get('email').setValue(this.selectedCustomer.username);
+        this.customerForm.get('avatar').setValue(this.selectedCustomer.password);
+        this.customerForm.get('avatar').setValue(this.selectedCustomer.birth);
     }
 };
 CustomerListComponent.ctorParameters = () => [
-    { type: _services_customers_service__WEBPACK_IMPORTED_MODULE_5__["CustomersService"] },
-    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormBuilder"] }
+    { type: _services_customers_service__WEBPACK_IMPORTED_MODULE_5__["CustomersService"] }
 ];
 CustomerListComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
@@ -1409,7 +1398,7 @@ NavbarComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\n  <owl-carousel [options]=\"homeSlider\" [carouselClasses]=\"['owl-theme']\">\n    <div class=\"item\">\n      <img src=\"../../assets/images/slide2.jpg\" />\n    </div>\n    <div class=\"item\">\n      <img src=\"../../assets/images/slide1.jpg\" />\n    </div>\n  </owl-carousel>\n</div>\n<br />\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\" style=\"text-align: center\">\n  <owl-carousel [options]=\"homeSlider\" [carouselClasses]=\"['owl-theme']\">\n    <div class=\"item\">\n      <img src=\"../../assets/images/img13.jpg\" />\n      <br />\n      <h1>Qyaho 은행</h1>\n    </div>\n    <div class=\"item\">\n      <img src=\"../../assets/images/img22.png\" /> \n      <br />\n      <h1>Qyaho 은행</h1>\n    </div>\n  </owl-carousel>\n</div>\n<br />\n");
 
 /***/ }),
 
@@ -1530,7 +1519,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<style type=\"text/css\">\n  .blank {\n    height: 150px;\n  }\n</style>\n\n<br />\n<div *ngIf=\"!checkLoggedIn()\" style=\"text-align: center; vertical-align: top\">\n  <h4 class=\"comment\">아직 계정이 없으신가요?</h4>\n  <h3 class=\"comment1\">계정이 있으시면 로그인하세요!</h3>\n  <br />\n\n  <button\n    *ngIf=\"!checkLoggedIn()\"\n    type=\"button\"\n    class=\"btn btn-primary\"\n    routerLink=\"/business\"\n  >\n    사업자 회원 가입\n  </button>\n  &nbsp;\n  <button\n    *ngIf=\"!checkLoggedIn()\"\n    type=\"button\"\n    style=\"text-align: center; vertical-align: top\"\n    class=\"btn btn-primary\"\n    type=\"button\"\n    routerLink=\"/businesslogin\"\n  >\n    사업자 로그인\n  </button>\n  &nbsp;\n  <br />\n</div>\n<br />\n<div\n  *ngIf=\"checkLoggedIn()\"\n  style=\"\n    text-align: center;\n    vertical-align: top;\n    border: 1px solid peachpuff;\n    border-radius: 60px;\n    padding-top: 10px;\n    background-color: peachpuff;\n  \"\n>\n  <h1 style=\"padding-top: 10px; padding-bottom: 10px\">\n    어서오세요! Qyaho 은행입니다.\n  </h1>\n</div>\n<br />\n<div\n  *ngIf=\"checkLoggedIn()\"\n  style=\"\n    text-align: center;\n    vertical-align: top;\n    border: 1px solid peachpuff;\n    border-radius: 5px;\n    padding: 10px;\n    background-color: peachpuff;\n  \"\n>\n  <button type=\"button\" class=\"btn btn-primary\" routerLink=\"/qrscan\">\n    대기 순번 등록\n  </button>\n  &nbsp;\n  <button class=\"btn btn-primary\" type=\"button\" routerLink=\"/qrscan\">\n    대기 순번 서비스 제공\n  </button>\n\n  <h2 class=\"waitpeople\">현재 대기자 수는 {{ customersQuantity }}명 입니다.</h2>\n  <h2 class=\"waitpeople\">\n    예상 대기 시간은 {{ customersQuantity * 5 }}분 입니다.\n  </h2>\n</div>\n<br />\n<div>\n  <app-pic-slide></app-pic-slide>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<style type=\"text/css\">\n  .blank {\n    height: 150px;\n  }\n</style>\n\n<br />\n<div *ngIf=\"!checkLoggedIn()\" style=\"text-align: center; vertical-align: top\">\n  <h4 class=\"comment\">아직 계정이 없으신가요?</h4>\n  <h3 class=\"comment1\">계정이 있으시면 로그인하세요!</h3>\n  <br />\n\n  <button\n    *ngIf=\"!checkLoggedIn()\"\n    type=\"button\"\n    class=\"btn btn-dark\"\n    routerLink=\"/business\"\n  >\n    사업자 회원 가입\n  </button>\n  &nbsp;\n  <button\n    *ngIf=\"!checkLoggedIn()\"\n    type=\"button\"\n    style=\"text-align: center; vertical-align: top\"\n    class=\"btn btn-dark\"\n    type=\"button\"\n    routerLink=\"/businesslogin\"\n  >\n    사업자 로그인\n  </button>\n  &nbsp;\n  <br />\n</div>\n<br />\n<div\n  *ngIf=\"checkLoggedIn()\"\n  style=\"\n    text-align: center;\n    vertical-align: top;\n    border: 1px solid lightgrey;\n    border-radius: 60px;\n    padding-top: 10px;\n    background-color: lightgrey;\n  \"\n>\n  <h1 style=\"padding-top: 10px; padding-bottom: 10px\">\n    어서오세요! Qyaho 은행입니다.\n  </h1>\n</div>\n<br />\n<div\n  *ngIf=\"checkLoggedIn()\"\n  style=\"\n    text-align: center;\n    vertical-align: top;\n    border: 1px solid lightgrey;\n    border-radius: 5px;\n    padding: 10px;\n    background-color: lightgrey;\n  \"\n>\n  <h2>현재 대기자 수는 {{ customersQuantity }}명 입니다.</h2>\n  <h2>예상 대기 시간은 {{ customersQuantity * 5 }}분 입니다.</h2>\n</div>\n<br />\n<div>\n  <app-pic-slide></app-pic-slide>\n</div>\n");
 
 /***/ }),
 
@@ -1543,7 +1532,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<br>\n<h2 class=\"page-header\">Qyaho 사업자 회원가입</h2>\n<br>\n<form (ngSubmit)=\"onRegisterSubmit()\">\n    <div class = \"from-group\">\n        <label> * 이름 </label>\n        <input type=\"text\" [(ngModel)]=\"name\" name=\"name\" class=\"form-control\">\n    </div>\n    <div class=\"form-gruop\">\n        <label> * 이메일 </label>\n        <input type=\"text\" [(ngModel)]=\"email\" name=\"email\" class=\"form-control\">\n    </div>\n    <div class=\"form-gruop\">\n        <label> * 생년월일 </label>\n        <input type=\"date\" [(ngModel)]=\"birth\" name=\"birth\" class=\"form-control\">\n    </div>\n    <div class=\"form-gruop\">\n        <label> * ID </label>\n        <input type=\"text\" [(ngModel)]=\"username\" name=\"username\" class=\"form-control\">\n    </div>\n    <div class=\"form-group\">\n        <label> * 비밀번호 </label>\n        <input type=\"password\" [(ngModel)]=\"password1\" name=\"password1\" class=\"form-control\">\n    </div>\n    <div class=\"form-group\">\n        <label> * 비밀번호 확인 </label>\n        <input type=\"password\" [(ngModel)]=\"password2\" name=\"password2\" class=\"form-control\">\n    </div>\n    <div class = \"form-group\">\n        <label> * 사업자 번호('-' 없이 입력) </label>\n        <input type=\"number\" [(ngModel)]=\"licenseNum\" name=\"licenseNum\" class=\"form-control\">\n    </div>\n    <br>\n    <input type=\"submit\" class=\"btn btn-primary\" value=\"가입하기\">\n</form>");
+/* harmony default export */ __webpack_exports__["default"] = ("<br>\n<h2 class=\"page-header\">Qyaho 사업자 회원가입</h2>\n<br>\n<form (ngSubmit)=\"onRegisterSubmit()\">\n    <div class = \"from-group\">\n        <label> * 이름 </label>\n        <input type=\"text\" [(ngModel)]=\"name\" name=\"name\" class=\"form-control\">\n    </div>\n    <div class=\"form-gruop\">\n        <label> * 이메일 </label>\n        <input type=\"text\" [(ngModel)]=\"email\" name=\"email\" class=\"form-control\">\n    </div>\n    <div class=\"form-gruop\">\n        <label> * 생년월일 </label>\n        <input type=\"date\" [(ngModel)]=\"birth\" name=\"birth\" class=\"form-control\">\n    </div>\n    <div class=\"form-gruop\">\n        <label> * ID </label>\n        <input type=\"text\" [(ngModel)]=\"username\" name=\"username\" class=\"form-control\">\n    </div>\n    <div class=\"form-group\">\n        <label> * 비밀번호 </label>\n        <input type=\"password\" [(ngModel)]=\"password1\" name=\"password1\" class=\"form-control\">\n    </div>\n    <div class=\"form-group\">\n        <label> * 비밀번호 확인 </label>\n        <input type=\"password\" [(ngModel)]=\"password2\" name=\"password2\" class=\"form-control\">\n    </div>\n    <div class = \"form-group\">\n        <label> * 사업자 번호('-' 없이 입력) </label>\n        <input type=\"number\" [(ngModel)]=\"licenseNum\" name=\"licenseNum\" class=\"form-control\">\n    </div>\n    <br>\n    <input type=\"submit\" class=\"btn btn-dark\" value=\"가입하기\">\n</form>");
 
 /***/ }),
 
@@ -1584,7 +1573,8 @@ const routes = [
     { path: 'business', component: _components_business_business_component__WEBPACK_IMPORTED_MODULE_6__["BusinessComponent"] },
     { path: 'businesslogin', component: _components_businesslogin_businesslogin_component__WEBPACK_IMPORTED_MODULE_7__["BusinessloginComponent"] },
     { path: 'Customer_list', component: _components_customer_list_customer_list_component__WEBPACK_IMPORTED_MODULE_8__["CustomerListComponent"] },
-    { path: 'qrscan', component: _components_Qrscan_qrscan_component__WEBPACK_IMPORTED_MODULE_9__["QrscanComponent"] }
+    { path: 'qrscan', component: _components_Qrscan_qrscan_component__WEBPACK_IMPORTED_MODULE_9__["QrscanComponent"] },
+    { path: '**', component: _components_home_home_component__WEBPACK_IMPORTED_MODULE_4__["HomeComponent"] },
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
