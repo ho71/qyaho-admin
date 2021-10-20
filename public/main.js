@@ -330,7 +330,7 @@ BusinessComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<br />\n<h1 class=\"text-center\">회원 목록</h1>\n<div>\n  <div class=\"text-right mt-6\">\n    <p class=\"text-success\">회원 수: {{ UsersQuantity }}</p>\n  </div>\n  <table class=\"table\">\n    <thead class=\"thead-dark\">\n      <tr class=\"text-center\">\n        <th scope=\"col\">이름</th>\n        <th scope=\"col\">ID</th>\n        <th scope=\"col\">이메일</th>\n        <th scope=\"col\">생일</th>\n        <th scope=\"col\">회원 삭제</th>\n      </tr>\n    </thead>\n\n    <tbody>\n      <tr *ngFor=\"let user of Users\">\n        <td class=\"text-center\" style=\"width: 20%\">\n          <h5>{{ user.name }}</h5>\n        </td>\n        <td class=\"text-center\" style=\"width: 20%\">\n          <h5>{{ user.username }}</h5>\n        </td>\n        <td class=\"text-center\" style=\"width: 20%\">\n          <h5>{{ user.email }}</h5>\n        </td>\n        <td class=\"text-center\" style=\"width: 20%\">\n          <h5>{{ user.birth }}</h5>\n        </td>\n\n        <td class=\"text-center\" style=\"width: 10%\">\n          <button (click)=\"deleteUser(user._id)\" class=\"btn btn-danger\">\n            삭제\n          </button>\n        </td>\n      </tr>\n    </tbody>\n  </table>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<br />\n<h1 class=\"text-center\">회원 목록</h1>\n<div>\n  <div class=\"text-right mt-6\">\n    <p class=\"text-success\">회원 수: {{ customersQuantity }}</p>\n  </div>\n  <table class=\"table\">\n    <thead class=\"thead-dark\">\n      <tr class=\"text-center\">\n        <th scope=\"col\">이름</th>\n        <th scope=\"col\">ID</th>\n        <th scope=\"col\">이메일</th>\n        <th scope=\"col\">생일</th>\n        <th scope=\"col\">회원 삭제</th>\n      </tr>\n    </thead>\n\n    <tbody>\n      <tr *ngFor=\"let customer of customers\">\n        <td class=\"text-center\" style=\"width: 20%\">\n          <h5>{{ customer.name }}</h5>\n        </td>\n        <td class=\"text-center\" style=\"width: 20%\">\n          <h5>{{ customer.username }}</h5>\n        </td>\n        <td class=\"text-center\" style=\"width: 20%\">\n          <h5>{{ customer.email }}</h5>\n        </td>\n        <!-- <td class=\"text-center\" style=\"width: 20%;\">\n              <h5>{{ customer.password }}</h5>\n            </td> -->\n        <td class=\"text-center\" style=\"width: 20%\">\n          <h5>{{ customer.birth }}</h5>\n        </td>\n\n        <td class=\"text-center\" style=\"width: 10%\">\n          <button (click)=\"deleteCustomer(customer._id)\" class=\"btn btn-danger\">\n            삭제\n          </button>\n        </td>\n      </tr>\n    </tbody>\n  </table>\n</div>\n");
 
 /***/ }),
 
@@ -1133,17 +1133,17 @@ __webpack_require__.r(__webpack_exports__);
 let CustomerListComponent = class CustomerListComponent {
     constructor(customersService) {
         this.customersService = customersService;
-        this.Users = [];
-        this.UsersQuantity = 0;
+        this.customers = [];
+        this.customersQuantity = 0;
     }
     ngOnInit() {
         this.customersService.getCustomers().subscribe((data) => {
-            this.Users = data;
-            this.UsersQuantity = data.length;
+            this.customers = data;
+            this.customersQuantity = data.length;
         });
     }
     //회원 삭제
-    deleteUser(id) {
+    deleteCustomer(id) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_5___default.a.fire({
             title: '회원 삭제',
             text: '정말로 회원을 삭제 하시겠습니까?',
@@ -1152,12 +1152,11 @@ let CustomerListComponent = class CustomerListComponent {
             confirmButtonColor: '#d33',
             cancelButtonColor: '#3085d6',
             confirmButtonText: '확인',
-            cancelButtonText: '취소',
         }).then((result) => {
             if (result.value) {
                 this.customersService.deleteCustomer(id);
-                this.Users = this.Users.filter((Users) => Users._id !== id);
-                this.UsersQuantity = this.UsersQuantity - 1;
+                this.customers = this.customers.filter((customer) => customer._id !== id);
+                this.customersQuantity = this.customersQuantity - 1;
                 sweetalert2__WEBPACK_IMPORTED_MODULE_5___default.a.fire('성공!', '회원을 정상적으로 삭제했습니다.', 'success');
             }
         });

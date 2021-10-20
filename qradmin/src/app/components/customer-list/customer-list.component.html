@@ -2,7 +2,7 @@
 <h1 class="text-center">회원 목록</h1>
 <div>
   <div class="text-right mt-6">
-    <p class="text-success">회원 수: {{ UsersQuantity }}</p>
+    <p class="text-success">회원 수: {{ customersQuantity }}</p>
   </div>
   <table class="table">
     <thead class="thead-dark">
@@ -16,22 +16,25 @@
     </thead>
 
     <tbody>
-      <tr *ngFor="let user of Users">
+      <tr *ngFor="let customer of customers">
         <td class="text-center" style="width: 20%">
-          <h5>{{ user.name }}</h5>
+          <h5>{{ customer.name }}</h5>
         </td>
         <td class="text-center" style="width: 20%">
-          <h5>{{ user.username }}</h5>
+          <h5>{{ customer.username }}</h5>
         </td>
         <td class="text-center" style="width: 20%">
-          <h5>{{ user.email }}</h5>
+          <h5>{{ customer.email }}</h5>
         </td>
+        <!-- <td class="text-center" style="width: 20%;">
+              <h5>{{ customer.password }}</h5>
+            </td> -->
         <td class="text-center" style="width: 20%">
-          <h5>{{ user.birth }}</h5>
+          <h5>{{ customer.birth }}</h5>
         </td>
 
         <td class="text-center" style="width: 10%">
-          <button (click)="deleteUser(user._id)" class="btn btn-danger">
+          <button (click)="deleteCustomer(customer._id)" class="btn btn-danger">
             삭제
           </button>
         </td>

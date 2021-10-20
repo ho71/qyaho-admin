@@ -7,8 +7,8 @@ router.get("/cus_list", async (req, res) => {
   res.json(customer);
 });
 
-router.delete("/remove", async (req, res) => {
-  await User.deleteMany();
+router.delete("/cus_list/:id", async (req, res) => {
+  await User.findByIdAndDelete(req.params.id);
   res.json({
     message: "ok",
   });
