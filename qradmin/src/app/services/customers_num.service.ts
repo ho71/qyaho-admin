@@ -22,7 +22,7 @@ export class CustomerNumService {
     return ep;
   }
 
-  API_URL: string = this.prepEndpoint('cusnum/cus_nums/');
+  API_URL: string = this.prepEndpoint('cusnum/cus_nums');
 
   constructor(private http: HttpClient) {}
 

@@ -1059,7 +1059,7 @@ const httpOptions = {
 let CustomerNumService = class CustomerNumService {
     constructor(http) {
         this.http = http;
-        this.API_URL = this.prepEndpoint('cusnum/cus_nums/');
+        this.API_URL = this.prepEndpoint('cusnum/cus_nums');
     }
     prepEndpoint(ep) {
         // 1. localhost에 포팅시

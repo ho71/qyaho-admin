@@ -51,7 +51,7 @@ router.post("/cus_nums", async (req, res) => {
   }
 });
 
-router.post("/cus_nums/1", async (req, res) => {
+router.post("/cus_nums1", async (req, res) => {
   no = req.body.no;
   nam = req.body.name;
   const nno = await Cus_num.findOne().sort({ no: 1 }).limit(1);
