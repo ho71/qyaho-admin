@@ -4,4 +4,5 @@ export class Cus_num {
     username: string;
     birth: string;
     time: Number;
+    no: number;
 }

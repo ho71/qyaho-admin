@@ -57,18 +57,19 @@ router.post("/cus_nums/1", async (req, res) => {
   const nno = await Cus_num.findOne().sort({ no: 1 }).limit(1);
 
   if (nno.no == no) {
+    console.log(this.nam);
     //같은 username의 쿼리문 있으면 대기자 명단에서 삭제
     await Cus_num.deleteMany({ no: no });
     return res.send({
       success: true,
       title: "환영합니다!",
-      msg: this.nam + "님의 차례입니다!",
+      msg: nam + "님의 차례입니다!",
     });
   } else {
     return res.send({
       success: false,
       title: "차례를 확인해주세요!",
-      msg: this.nam + "님의 차례가 아닙니다!",
+      msg: nam + "님의 차례가 아닙니다!",
     });
   }
 });
