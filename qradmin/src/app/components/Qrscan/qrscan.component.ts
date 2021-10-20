@@ -15,7 +15,7 @@ export class QrscanComponent {
   @ViewChild('canvas') canvasElement: ElementRef | undefined;
 
   stream: MediaStream | undefined;
-  no: number = 0;
+  no: number = 1;
 
   constructor(
     private customer1Service: CustomerNumService,

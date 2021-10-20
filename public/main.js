@@ -44,7 +44,7 @@ let QrscanComponent = class QrscanComponent {
     constructor(customer1Service, dialog) {
         this.customer1Service = customer1Service;
         this.dialog = dialog;
-        this.no = 0;
+        this.no = 1;
     }
     toggleVideoMedia() {
         if (this.isActive()) {
