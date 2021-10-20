@@ -53,13 +53,12 @@ router.post("/cus_nums", async (req, res) => {
 
 router.post("/cus_nums1", async (req, res) => {
   username = req.body.username;
-  no = req.body.no;
   nam = req.body.name;
   const nno = await Cus_num.findOne().sort({ no: 1 }).limit(1);
   nid = await Cus_num.findOne({ username: username }); //cus num db에서 같은 username의 쿼리문 찾기
 
   if (nid !== null) {
-    if (nno.no == no) {
+    if (nno.no == nid.no) {
       //같은 username의 쿼리문 있으면 대기자 명단에서 삭제
       await Cus_num.deleteMany({ username: username });
       return res.send({
