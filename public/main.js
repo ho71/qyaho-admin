@@ -28,11 +28,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var jsqr__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jsqr */ "7Ozu");
 /* harmony import */ var jsqr__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(jsqr__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/material/dialog */ "0IaG");
-/* harmony import */ var _services_customers_num_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../services/customers_num.service */ "Zfc8");
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! sweetalert2 */ "PSD3");
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_7__);
-
+/* harmony import */ var _services_customers_num_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/customers_num.service */ "Zfc8");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! sweetalert2 */ "PSD3");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_6__);
 
 
 
@@ -41,15 +39,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let QrscanComponent = class QrscanComponent {
-    constructor(customer1Service, dialog) {
+    constructor(customer1Service) {
         this.customer1Service = customer1Service;
-        this.dialog = dialog;
         this.no = 1;
     }
     toggleVideoMedia() {
         if (this.isActive()) {
             this.stopVideo();
-            sweetalert2__WEBPACK_IMPORTED_MODULE_7___default.a.fire({
+            sweetalert2__WEBPACK_IMPORTED_MODULE_6___default.a.fire({
                 title: '카메라',
                 text: '작동 중지',
                 icon: 'success',
@@ -62,7 +59,7 @@ let QrscanComponent = class QrscanComponent {
         }
         else {
             this.startVideo();
-            sweetalert2__WEBPACK_IMPORTED_MODULE_7___default.a.fire({
+            sweetalert2__WEBPACK_IMPORTED_MODULE_6___default.a.fire({
                 title: '카메라',
                 text: '작동 시작',
                 timer: 2000,
@@ -140,7 +137,7 @@ let QrscanComponent = class QrscanComponent {
     manageSubmit(values) {
         this.customer1Service.addCustomerNum(values).subscribe((data) => {
             if (data.success) {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_7___default.a.fire({
+                sweetalert2__WEBPACK_IMPORTED_MODULE_6___default.a.fire({
                     title: data.title,
                     text: data.msg,
                     icon: 'success',
@@ -149,7 +146,7 @@ let QrscanComponent = class QrscanComponent {
                 this.no += 1;
             }
             else {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_7___default.a.fire({
+                sweetalert2__WEBPACK_IMPORTED_MODULE_6___default.a.fire({
                     title: data.title,
                     text: data.msg,
                     icon: 'error',
@@ -160,8 +157,7 @@ let QrscanComponent = class QrscanComponent {
     }
 };
 QrscanComponent.ctorParameters = () => [
-    { type: _services_customers_num_service__WEBPACK_IMPORTED_MODULE_6__["CustomerNumService"] },
-    { type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__["MatDialog"] }
+    { type: _services_customers_num_service__WEBPACK_IMPORTED_MODULE_5__["CustomerNumService"] }
 ];
 QrscanComponent.propDecorators = {
     videoElement: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ViewChild"], args: ['video',] }],
@@ -334,7 +330,7 @@ BusinessComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<br />\n<h1 class=\"text-center\">회원 목록</h1>\n<div>\n  <div class=\"text-right mt-6\">\n    <p class=\"text-success\">회원 수: {{ customersQuantity }}</p>\n  </div>\n  <table class=\"table\">\n    <thead class=\"thead-dark\">\n      <tr class=\"text-center\">\n        <th scope=\"col\">이름</th>\n        <th scope=\"col\">ID</th>\n        <th scope=\"col\">이메일</th>\n        <th scope=\"col\">생일</th>\n        <th scope=\"col\">회원 삭제</th>\n      </tr>\n    </thead>\n\n    <tbody>\n      <tr *ngFor=\"let customer of customers\">\n        <td class=\"text-center\" style=\"width: 20%\">\n          <h5>{{ customer.name }}</h5>\n        </td>\n        <td class=\"text-center\" style=\"width: 20%\">\n          <h5>{{ customer.username }}</h5>\n        </td>\n        <td class=\"text-center\" style=\"width: 20%\">\n          <h5>{{ customer.email }}</h5>\n        </td>\n        <!-- <td class=\"text-center\" style=\"width: 20%;\">\n              <h5>{{ customer.password }}</h5>\n            </td> -->\n        <td class=\"text-center\" style=\"width: 20%\">\n          <h5>{{ customer.birth }}</h5>\n        </td>\n\n        <td class=\"text-center\" style=\"width: 10%\">\n          <button (click)=\"deleteCustomer(customer._id)\" class=\"btn btn-danger\">\n            삭제\n          </button>\n        </td>\n      </tr>\n    </tbody>\n  </table>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<br />\n<h1 class=\"text-center\">회원 목록</h1>\n<div>\n  <div class=\"text-right mt-6\">\n    <p class=\"text-success\">회원 수: {{ UsersQuantity }}</p>\n  </div>\n  <table class=\"table\">\n    <thead class=\"thead-dark\">\n      <tr class=\"text-center\">\n        <th scope=\"col\">이름</th>\n        <th scope=\"col\">ID</th>\n        <th scope=\"col\">이메일</th>\n        <th scope=\"col\">생일</th>\n        <th scope=\"col\">회원 삭제</th>\n      </tr>\n    </thead>\n\n    <tbody>\n      <tr *ngFor=\"let user of Users\">\n        <td class=\"text-center\" style=\"width: 20%\">\n          <h5>{{ user.name }}</h5>\n        </td>\n        <td class=\"text-center\" style=\"width: 20%\">\n          <h5>{{ user.username }}</h5>\n        </td>\n        <td class=\"text-center\" style=\"width: 20%\">\n          <h5>{{ user.email }}</h5>\n        </td>\n        <td class=\"text-center\" style=\"width: 20%\">\n          <h5>{{ user.birth }}</h5>\n        </td>\n\n        <td class=\"text-center\" style=\"width: 10%\">\n          <button (click)=\"deleteUser(user._id)\" class=\"btn btn-danger\">\n            삭제\n          </button>\n        </td>\n      </tr>\n    </tbody>\n  </table>\n</div>\n");
 
 /***/ }),
 
@@ -1137,17 +1133,17 @@ __webpack_require__.r(__webpack_exports__);
 let CustomerListComponent = class CustomerListComponent {
     constructor(customersService) {
         this.customersService = customersService;
-        this.customers = [];
-        this.customersQuantity = 0;
+        this.Users = [];
+        this.UsersQuantity = 0;
     }
     ngOnInit() {
         this.customersService.getCustomers().subscribe((data) => {
-            this.customers = data;
-            this.customersQuantity = data.length;
+            this.Users = data;
+            this.UsersQuantity = data.length;
         });
     }
     //회원 삭제
-    deleteCustomer(id) {
+    deleteUser(id) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_5___default.a.fire({
             title: '회원 삭제',
             text: '정말로 회원을 삭제 하시겠습니까?',
@@ -1160,8 +1156,8 @@ let CustomerListComponent = class CustomerListComponent {
         }).then((result) => {
             if (result.value) {
                 this.customersService.deleteCustomer(id);
-                this.customers = this.customers.filter((customer) => customer._id !== id);
-                this.customersQuantity = this.customersQuantity - 1;
+                this.Users = this.Users.filter((Users) => Users._id !== id);
+                this.UsersQuantity = this.UsersQuantity - 1;
                 sweetalert2__WEBPACK_IMPORTED_MODULE_5___default.a.fire('성공!', '회원을 정상적으로 삭제했습니다.', 'success');
             }
         });
@@ -1413,11 +1409,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var jsqr__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jsqr */ "7Ozu");
 /* harmony import */ var jsqr__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(jsqr__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/material/dialog */ "0IaG");
-/* harmony import */ var _services_customers_num_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../services/customers_num.service */ "Zfc8");
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! sweetalert2 */ "PSD3");
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_7__);
-
+/* harmony import */ var _services_customers_num_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/customers_num.service */ "Zfc8");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! sweetalert2 */ "PSD3");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_6__);
 
 
 
@@ -1426,14 +1420,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let Qrscan1Component = class Qrscan1Component {
-    constructor(customer1Service, dialog) {
+    constructor(customer1Service) {
         this.customer1Service = customer1Service;
-        this.dialog = dialog;
     }
     toggleVideoMedia() {
         if (this.isActive()) {
             this.stopVideo();
-            sweetalert2__WEBPACK_IMPORTED_MODULE_7___default.a.fire({
+            sweetalert2__WEBPACK_IMPORTED_MODULE_6___default.a.fire({
                 title: '카메라',
                 text: '작동 중지',
                 icon: 'success',
@@ -1446,7 +1439,7 @@ let Qrscan1Component = class Qrscan1Component {
         }
         else {
             this.startVideo();
-            sweetalert2__WEBPACK_IMPORTED_MODULE_7___default.a.fire({
+            sweetalert2__WEBPACK_IMPORTED_MODULE_6___default.a.fire({
                 title: '카메라',
                 text: '작동 시작',
                 timer: 2000,
@@ -1520,7 +1513,7 @@ let Qrscan1Component = class Qrscan1Component {
     manageSubmit(values) {
         this.customer1Service.addCustomer1Num(values).subscribe((data) => {
             if (data.success) {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_7___default.a.fire({
+                sweetalert2__WEBPACK_IMPORTED_MODULE_6___default.a.fire({
                     title: data.title,
                     text: data.msg,
                     icon: 'success',
@@ -1528,7 +1521,7 @@ let Qrscan1Component = class Qrscan1Component {
                 });
             }
             else {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_7___default.a.fire({
+                sweetalert2__WEBPACK_IMPORTED_MODULE_6___default.a.fire({
                     title: data.title,
                     text: data.msg,
                     icon: 'error',
@@ -1539,8 +1532,7 @@ let Qrscan1Component = class Qrscan1Component {
     }
 };
 Qrscan1Component.ctorParameters = () => [
-    { type: _services_customers_num_service__WEBPACK_IMPORTED_MODULE_6__["CustomerNumService"] },
-    { type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__["MatDialog"] }
+    { type: _services_customers_num_service__WEBPACK_IMPORTED_MODULE_5__["CustomerNumService"] }
 ];
 Qrscan1Component.propDecorators = {
     videoElement: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ViewChild"], args: ['video',] }],

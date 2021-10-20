@@ -1,7 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import jsQR from 'jsqr';
-
-import { MatDialog } from '@angular/material/dialog';
 import { CustomerNumService } from '../../services/customers_num.service';
 import Swal from 'sweetalert2';
 
@@ -17,8 +15,7 @@ export class Qrscan1Component {
   stream: MediaStream | undefined;
 
   constructor(
-    private customer1Service: CustomerNumService,
-    public dialog: MatDialog
+    private customer1Service: CustomerNumService
   ) {}
 
   toggleVideoMedia(): void {
