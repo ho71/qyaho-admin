@@ -1059,7 +1059,6 @@ const httpOptions = {
 let CustomerNumService = class CustomerNumService {
     constructor(http) {
         this.http = http;
-        this.API_URL = this.prepEndpoint('cusnum/cus_nums');
     }
     prepEndpoint(ep) {
         // 1. localhost에 포팅시
@@ -1068,17 +1067,21 @@ let CustomerNumService = class CustomerNumService {
         return ep;
     }
     getCustomerNums() {
-        return this.http.get(this.API_URL, httpOptions);
+        const getCustomer = this.prepEndpoint('cusnum/cus_nums');
+        return this.http.get(getCustomer, httpOptions);
     }
     addCustomerNum(Cus_num) {
-        return this.http.post(this.API_URL, Cus_num, httpOptions);
+        const addCustomer = this.prepEndpoint('cusnum/cus_nums');
+        return this.http.post(addCustomer, Cus_num, httpOptions);
     }
     addCustomer1Num(Cus_num) {
-        return this.http.post(this.API_URL + '1', Cus_num, httpOptions);
+        const addCustomer1 = this.prepEndpoint('cusnum/cus_nums1');
+        return this.http.post(addCustomer1, Cus_num, httpOptions);
     }
     deleteCustomerNum(id) {
+        const deleteCustomer = this.prepEndpoint('cusnum/cus_nums');
         return this.http
-            .delete(this.API_URL + `${id}`, httpOptions)
+            .delete(deleteCustomer + `${id}`, httpOptions)
             .subscribe();
     }
 };

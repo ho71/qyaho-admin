@@ -22,25 +22,27 @@ export class CustomerNumService {
     return ep;
   }
 
-  API_URL: string = this.prepEndpoint('cusnum/cus_nums');
-
   constructor(private http: HttpClient) {}
 
   getCustomerNums() {
-    return this.http.get<Cus_num[]>(this.API_URL, httpOptions);
+    const getCustomer = this.prepEndpoint('cusnum/cus_nums');
+    return this.http.get<Cus_num[]>(getCustomer, httpOptions);
   }
 
   addCustomerNum(Cus_num: Cus_num): Observable<any> {
-    return this.http.post<Cus_num>(this.API_URL, Cus_num, httpOptions);
+    const addCustomer = this.prepEndpoint('cusnum/cus_nums');
+    return this.http.post<Cus_num>(addCustomer, Cus_num, httpOptions);
   }
 
   addCustomer1Num(Cus_num: Cus_num): Observable<any> {
-    return this.http.post<Cus_num>(this.API_URL+'1', Cus_num, httpOptions);
+    const addCustomer1 = this.prepEndpoint('cusnum/cus_nums1');
+    return this.http.post<Cus_num>(addCustomer1, Cus_num, httpOptions);
   }
 
   deleteCustomerNum(id: string) {
+    const deleteCustomer = this.prepEndpoint('cusnum/cus_nums');
     return this.http
-      .delete<Cus_num>(this.API_URL + `${id}`, httpOptions)
+      .delete<Cus_num>(deleteCustomer + `${id}`, httpOptions)
       .subscribe();
   }
 }
