@@ -17,9 +17,9 @@
     </thead>
 
     <tbody>
-      <tr *ngFor="let customer of customers; let i = index">
+      <tr *ngFor="let customer of customers;">
         <td class="text-center" style="width: 10%;">
-          <h5>{{i+1}}</h5>
+          <h5>{{ customer.no }}</h5>
         </td>
         <td class="text-center" style="width: 40%;">
           <h5>{{ customer.name }}</h5>

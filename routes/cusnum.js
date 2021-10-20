@@ -31,22 +31,44 @@ router.post("/cus_nums", async (req, res) => {
       return res.send({
         success: false,
         title: "유효 기간이 지난 QRCODE입니다.",
-        msg: "QRcode를 refreash해주세요!",
+        msg: "QRcode를 재발급 해주세요!",
       });
     }
   } else if (nid.username == username) {
     //같은 username의 쿼리문 있으면 대기자 명단에서 삭제
     await Cus_num.deleteMany({ username: username });
     return res.send({
-      success: true,
+      success: false,
       title: "대기등록 종료!",
-      msg: "대기를 완료했습니다!",
+      msg: "대기를 취소했습니다!",
     });
   } else {
     return res.send({
       success: false,
       title: "알 수 없는 오류 발생",
       msg: "에러 코드 2740.",
+    });
+  }
+});
+
+router.post("/cus_nums/1", async (req, res) => {
+  no = req.body.no;
+  nam = req.body.name;
+  const nno = await Cus_num.findOne().sort({ no: 1 }).limit(1);
+
+  if (nno.no == no) {
+    //같은 username의 쿼리문 있으면 대기자 명단에서 삭제
+    await Cus_num.deleteMany({ no: no });
+    return res.send({
+      success: true,
+      title: "환영합니다!",
+      msg: this.nam + "님의 차례입니다!",
+    });
+  } else {
+    return res.send({
+      success: false,
+      title: "차례를 확인해주세요!",
+      msg: this.nam + "님의 차례가 아닙니다!",
     });
   }
 });

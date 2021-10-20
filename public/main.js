@@ -44,6 +44,7 @@ let QrscanComponent = class QrscanComponent {
     constructor(customer1Service, dialog) {
         this.customer1Service = customer1Service;
         this.dialog = dialog;
+        this.no = 0;
     }
     toggleVideoMedia() {
         if (this.isActive()) {
@@ -120,6 +121,10 @@ let QrscanComponent = class QrscanComponent {
                 inversionAttempts: 'dontInvert',
             });
             if (qrcode && qrcode.data.length !== 0) {
+                const par = JSON.parse(qrcode.data);
+                par.no = this.no;
+                console.log(this.no);
+                qrcode.data = JSON.stringify(par);
                 this.manageSubmit(qrcode.data);
                 setTimeout(() => {
                     this.processImage();
@@ -141,6 +146,7 @@ let QrscanComponent = class QrscanComponent {
                     icon: 'success',
                     confirmButtonText: '확인',
                 });
+                this.no += 1;
             }
             else {
                 sweetalert2__WEBPACK_IMPORTED_MODULE_7___default.a.fire({
@@ -341,7 +347,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<br />\n<h2 class=\"page-header\">Qyaho 사업자 로그인</h2>\n<br />\n<form (ngSubmit)=\"onLoginSubmit()\">\n  <div class=\"form-group\">\n    <label>ID</label>\n    <input\n      type=\"text\"\n      class=\"form-control\"\n      name=\"username\"\n      [(ngModel)]=\"username\"\n    />\n  </div>\n  <br />\n  <div class=\"form-group\">\n    <label>비밀번호</label>\n    <input\n      type=\"password\"\n      class=\"form-control\"\n      name=\"password\"\n      [(ngModel)]=\"password\"\n    />\n  </div>\n  <br />\n  <div class=\"form-group\">\n    <label>사업자 번호(번호만 입력하세요.)</label>\n    <input\n      type=\"text\"\n      class=\"form-control\"\n      name=\"licenseNum\"\n      [(ngModel)]=\"licenseNum\"\n    />\n  </div>\n  <input type=\"submit\" class=\"btn btn-dark\" value=\"Login\" />\n</form>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<br />\n<h2 class=\"page-header\">Qyaho 사업자 로그인</h2>\n<br />\n<form (ngSubmit)=\"onLoginSubmit()\">\n  <div class=\"form-group\">\n    <label>ID</label>\n    <input\n      type=\"text\"\n      class=\"form-control\"\n      name=\"username\"\n      [(ngModel)]=\"username\"\n    />\n  </div>\n  <br />\n  <div class=\"form-group\">\n    <label>비밀번호</label>\n    <input\n      type=\"password\"\n      class=\"form-control\"\n      name=\"password\"\n      [(ngModel)]=\"password\"\n    />\n  </div>\n  <br />\n  <div class=\"form-group\">\n    <label>사업자 번호(번호만 입력하세요.)</label>\n    <input\n      type=\"text\"\n      class=\"form-control\"\n      name=\"licenseNum\"\n      [(ngModel)]=\"licenseNum\"\n    />\n  </div>\n  <input type=\"submit\" class=\"btn btn-dark\" value=\"로그인\" />\n</form>\n");
 
 /***/ }),
 
@@ -744,7 +750,7 @@ AppComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<br>\n<h1 class=\"text-center\">대기 순번 </h1>\n<div>\n  <div class=\"text-right mt-6\">\n    <p class=\"text-success\">대기자: {{ customersQuantity }}</p>\n  </div>\n  <table class=\"table\">\n    <thead class=\"thead-dark\">\n      <tr class=\"text-center\">\n        <th scope=\"col\">순번</th>\n        <th scope=\"col\">이름</th>\n        <!-- <th scope=\"col\">Email</th> -->\n        <!-- <th scope=\"col\">ID</th> -->\n        <th scope=\"col\">대기 등록 시간</th>\n        <th scope=\"col\">순번 삭제</th>\n      </tr>\n    </thead>\n\n    <tbody>\n      <tr *ngFor=\"let customer of customers; let i = index\">\n        <td class=\"text-center\" style=\"width: 10%;\">\n          <h5>{{i+1}}</h5>\n        </td>\n        <td class=\"text-center\" style=\"width: 40%;\">\n          <h5>{{ customer.name }}</h5>\n        </td>\n        <!-- <td class=\"text-center\" style=\"width: 20%;\">\n            <h5>{{ customer.email }}</h5>\n          </td> -->\n        <!-- <td class=\"text-center\" style=\"width: 20%;\">\n          <h5>{{ customer.username }}</h5>\n        </td> -->\n        <!-- <td class=\"text-center\" style=\"width: 20%;\">\n          <h5>{{ customer.password }}</h5>\n        </td> -->\n        <td class=\"text-center\" style=\"width: 40%;\">\n            <h5>{{customer.time| date: 'MM/dd hh:mm:ss a'}}</h5>\n          </td>\n\n        <td class=\"text-center\" style=\"width: 10%;\">\n          <button (click)=\"deleteCustomer(customer._id)\" class=\"btn btn-danger\">삭제</button>\n        </td>\n        <!-- <td class=\"text-center\" style=\"width: 5%;\">\n          <button (click)=\"editEmployee(employee)\" class=\"btn btn-warning\">Edit</button>\n        </td> -->\n      </tr>\n    </tbody>\n  </table>\n</div>\n\n\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<br>\n<h1 class=\"text-center\">대기 순번 </h1>\n<div>\n  <div class=\"text-right mt-6\">\n    <p class=\"text-success\">대기자: {{ customersQuantity }}</p>\n  </div>\n  <table class=\"table\">\n    <thead class=\"thead-dark\">\n      <tr class=\"text-center\">\n        <th scope=\"col\">순번</th>\n        <th scope=\"col\">이름</th>\n        <!-- <th scope=\"col\">Email</th> -->\n        <!-- <th scope=\"col\">ID</th> -->\n        <th scope=\"col\">대기 등록 시간</th>\n        <th scope=\"col\">순번 삭제</th>\n      </tr>\n    </thead>\n\n    <tbody>\n      <tr *ngFor=\"let customer of customers;\">\n        <td class=\"text-center\" style=\"width: 10%;\">\n          <h5>{{ customer.no }}</h5>\n        </td>\n        <td class=\"text-center\" style=\"width: 40%;\">\n          <h5>{{ customer.name }}</h5>\n        </td>\n        <!-- <td class=\"text-center\" style=\"width: 20%;\">\n            <h5>{{ customer.email }}</h5>\n          </td> -->\n        <!-- <td class=\"text-center\" style=\"width: 20%;\">\n          <h5>{{ customer.username }}</h5>\n        </td> -->\n        <!-- <td class=\"text-center\" style=\"width: 20%;\">\n          <h5>{{ customer.password }}</h5>\n        </td> -->\n        <td class=\"text-center\" style=\"width: 40%;\">\n            <h5>{{customer.time| date: 'MM/dd hh:mm:ss a'}}</h5>\n          </td>\n\n        <td class=\"text-center\" style=\"width: 10%;\">\n          <button (click)=\"deleteCustomer(customer._id)\" class=\"btn btn-danger\">삭제</button>\n        </td>\n        <!-- <td class=\"text-center\" style=\"width: 5%;\">\n          <button (click)=\"editEmployee(employee)\" class=\"btn btn-warning\">Edit</button>\n        </td> -->\n      </tr>\n    </tbody>\n  </table>\n</div>\n\n\n");
 
 /***/ }),
 
@@ -884,6 +890,7 @@ let CustomerNumComponent = class CustomerNumComponent {
             confirmButtonColor: '#d33',
             cancelButtonColor: '#3085d6',
             confirmButtonText: '확인',
+            cancelButtonText: '취소',
         }).then((result) => {
             if (result.value) {
                 this.customer1Service.deleteCustomerNum(id);
@@ -1066,6 +1073,9 @@ let CustomerNumService = class CustomerNumService {
     addCustomerNum(Cus_num) {
         return this.http.post(this.API_URL, Cus_num, httpOptions);
     }
+    addCustomer1Num(Cus_num) {
+        return this.http.post(this.API_URL + '1', Cus_num, httpOptions);
+    }
     deleteCustomerNum(id) {
         return this.http
             .delete(this.API_URL + `${id}`, httpOptions)
@@ -1143,6 +1153,7 @@ let CustomerListComponent = class CustomerListComponent {
             confirmButtonColor: '#d33',
             cancelButtonColor: '#3085d6',
             confirmButtonText: '확인',
+            cancelButtonText: '취소',
         }).then((result) => {
             if (result.value) {
                 this.customersService.deleteCustomer(id);
@@ -1415,7 +1426,6 @@ let Qrscan1Component = class Qrscan1Component {
     constructor(customer1Service, dialog) {
         this.customer1Service = customer1Service;
         this.dialog = dialog;
-        this.no = 0;
     }
     toggleVideoMedia() {
         if (this.isActive()) {
@@ -1492,10 +1502,6 @@ let Qrscan1Component = class Qrscan1Component {
                 inversionAttempts: 'dontInvert',
             });
             if (qrcode && qrcode.data.length !== 0) {
-                const par = JSON.parse(qrcode.data);
-                par.no = this.no;
-                console.log(this.no);
-                qrcode.data = JSON.stringify(par);
                 this.manageSubmit(qrcode.data);
                 setTimeout(() => {
                     this.processImage();
@@ -1509,7 +1515,7 @@ let Qrscan1Component = class Qrscan1Component {
         }
     }
     manageSubmit(values) {
-        this.customer1Service.addCustomerNum(values).subscribe((data) => {
+        this.customer1Service.addCustomer1Num(values).subscribe((data) => {
             if (data.success) {
                 sweetalert2__WEBPACK_IMPORTED_MODULE_7___default.a.fire({
                     title: data.title,
@@ -1517,7 +1523,6 @@ let Qrscan1Component = class Qrscan1Component {
                     icon: 'success',
                     confirmButtonText: '확인',
                 });
-                this.no += 1;
             }
             else {
                 sweetalert2__WEBPACK_IMPORTED_MODULE_7___default.a.fire({

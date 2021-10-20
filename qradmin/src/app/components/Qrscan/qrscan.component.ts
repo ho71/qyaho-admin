@@ -15,6 +15,7 @@ export class QrscanComponent {
   @ViewChild('canvas') canvasElement: ElementRef | undefined;
 
   stream: MediaStream | undefined;
+  no: number = 0;
 
   constructor(
     private customer1Service: CustomerNumService,
@@ -109,6 +110,10 @@ export class QrscanComponent {
       });
 
       if (qrcode && qrcode.data.length !== 0) {
+        const par = JSON.parse(qrcode.data);
+        par.no = this.no;
+        console.log(this.no);
+        qrcode.data = JSON.stringify(par);
         this.manageSubmit(qrcode.data);
         setTimeout(() => {
           this.processImage();
@@ -130,6 +135,7 @@ export class QrscanComponent {
           icon: 'success',
           confirmButtonText: '확인',
         });
+        this.no += 1;
       } else {
         Swal.fire({
           title: data.title,

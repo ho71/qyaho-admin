@@ -29,6 +29,7 @@ export class CustomerNumComponent {
       confirmButtonColor: '#d33',
       cancelButtonColor: '#3085d6',
       confirmButtonText: '확인',
+      cancelButtonText: '취소',
     }).then((result) => {
       if (result.value) {
         this.customer1Service.deleteCustomerNum(id);
