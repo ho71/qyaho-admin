@@ -1415,6 +1415,7 @@ let Qrscan1Component = class Qrscan1Component {
     constructor(customer1Service, dialog) {
         this.customer1Service = customer1Service;
         this.dialog = dialog;
+        this.no = 0;
     }
     toggleVideoMedia() {
         if (this.isActive()) {
@@ -1491,6 +1492,10 @@ let Qrscan1Component = class Qrscan1Component {
                 inversionAttempts: 'dontInvert',
             });
             if (qrcode && qrcode.data.length !== 0) {
+                const par = JSON.parse(qrcode.data);
+                par.no = this.no;
+                console.log(this.no);
+                qrcode.data = JSON.stringify(par);
                 this.manageSubmit(qrcode.data);
                 setTimeout(() => {
                     this.processImage();
@@ -1512,6 +1517,7 @@ let Qrscan1Component = class Qrscan1Component {
                     icon: 'success',
                     confirmButtonText: '확인',
                 });
+                this.no += 1;
             }
             else {
                 sweetalert2__WEBPACK_IMPORTED_MODULE_7___default.a.fire({

@@ -33,7 +33,7 @@ export class CustomerNumService {
   addCustomerNum(Cus_num: Cus_num): Observable<any> {
     return this.http.post<Cus_num>(this.API_URL, Cus_num, httpOptions);
   }
-
+  
   deleteCustomerNum(id: string) {
     return this.http
       .delete<Cus_num>(this.API_URL + `${id}`, httpOptions)

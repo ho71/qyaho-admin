@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const config = require('../config/database');
 
 const CusNumSchema = mongoose.Schema({
   name: {
@@ -13,7 +12,7 @@ const CusNumSchema = mongoose.Schema({
   },
   username: {
     type: String,
-  }
+  },
 });
   
 
