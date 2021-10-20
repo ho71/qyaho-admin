@@ -27,6 +27,26 @@ export class AuthService {
     return ep;
   }
 
+  loggedIn() {
+    return !this.jwtHelper.isTokenExpired(this.authToken);
+  }
+
+  logout() {
+    this.authToken = null;
+    this.userNoPW = null;
+    localStorage.clear();
+  }
+
+  businessUser(businessuser): Observable<any> {
+    const BusinessUrl = this.prepEndpoint('businesses/cos');
+    return this.http.post(BusinessUrl, businessuser, httpOptions);
+  }
+
+  authenticatebusiness(businesslogin): Observable<any> {
+    const BloginUrl = this.prepEndpoint('businesses/authenticate');
+    return this.http.post<Businesslogin>(BloginUrl, businesslogin, httpOptions);
+  }
+  
   storeUserData(token, userNoPW) {
     localStorage.setItem('id_token', token);
     localStorage.setItem('business', JSON.stringify(userNoPW));
@@ -42,28 +62,7 @@ export class AuthService {
         Authorization: 'Bearer ' + this.authToken,
       }),
     };
-
-    const profileUrl = this.prepEndpoint('users/profile');
+    const profileUrl = this.prepEndpoint('businesses/profile');
     return this.http.get(profileUrl, httpOptions1);
-  }
-
-  logout() {
-    this.authToken = null;
-    this.userNoPW = null;
-    localStorage.clear();
-  }
-
-  loggedIn() {
-    return !this.jwtHelper.isTokenExpired(this.authToken);
-  }
-
-  businessUser(businessuser): Observable<any> {
-    const BusinessUrl = this.prepEndpoint('businesses/cos');
-    return this.http.post(BusinessUrl, businessuser, httpOptions);
-  }
-
-  authenticatebusiness(businesslogin): Observable<any> {
-    const BloginUrl = this.prepEndpoint('businesses/authenticate');
-    return this.http.post<Businesslogin>(BloginUrl, businesslogin, httpOptions);
   }
 }

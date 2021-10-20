@@ -101,6 +101,7 @@ router1.get(
   "/profile",
   passport.authenticate("jwt", { session: false }),
   (req, res, next) => {
+    const curr_time = new Date();
     res.json({
       user: {
         name: req.user.name,
@@ -108,15 +109,10 @@ router1.get(
         email: req.user.email,
         birth: req.user.birth,
         licenseNum: req.user.licenseNum,
+        time: curr_time.getTime(),
       },
     });
   }
 );
 
-router1.get("/list", (req, res, next) => {
-  Business.getAll((err, businesses) => {
-    if (err) throw err;
-    res.json(businesses);
-  });
-});
 module.exports = router1;

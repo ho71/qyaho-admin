@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../models/User';
-import { Cus_num } from '../models/cus.num';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -29,26 +28,9 @@ export class CustomersService {
     return this.http.get<User[]>(this.API_URL, httpOptions);
   }
 
-  getCustomer(id: string) {
-    return this.http.get<User>(this.API_URL + `${id}`, httpOptions);
-  }
-
-  addCustomer(user: User) {
-    return this.http.post<User>(this.API_URL, user, httpOptions);
-  }
-
-  editCustomer(id: string, user: User) {
-    return this.http
-      .put<User>(this.API_URL + `${id}`, user, httpOptions)
-      .subscribe();
-  }
-
   deleteCustomer(id: string) {
     return this.http
       .delete<User>(this.API_URL + `${id}`, httpOptions)
       .subscribe();
-  }
-  getCustomerNums() {
-    return this.http.get<Cus_num[]>(this.API_URL, httpOptions);
   }
 }

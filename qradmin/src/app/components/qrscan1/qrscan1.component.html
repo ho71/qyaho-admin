@@ -1,8 +1,7 @@
 <br />
 <button
   *ngIf="!isActive()"
-  mat-icon-button
-  class="start"
+  mat-icon-button class="start"
   (click)="toggleVideoMedia()"
   [disabled]="isActive()"
   color="primary"
@@ -13,8 +12,7 @@
 
 <button
   *ngIf="isActive()"
-  mat-icon-button
-  class="stop"
+  mat-icon-button class="stop"
   (click)="toggleVideoMedia()"
   [disabled]="!isActive()"
   color="warn"

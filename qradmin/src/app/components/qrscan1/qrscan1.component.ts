@@ -6,11 +6,11 @@ import { CustomerNumService } from '../../services/customers_num.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-qrscan',
-  templateUrl: './qrscan.component.html',
-  styleUrls: ['./qrscan.component.css'],
+  selector: 'app-qrscan1',
+  templateUrl: './qrscan1.component.html',
+  styleUrls: ['./qrscan1.component.scss'],
 })
-export class QrscanComponent {
+export class Qrscan1Component {
   @ViewChild('video') videoElement: ElementRef | undefined;
   @ViewChild('canvas') canvasElement: ElementRef | undefined;
 

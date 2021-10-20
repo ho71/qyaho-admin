@@ -1,0 +1,25 @@
+.mat-icon-button.start {
+  width: 75px;
+  height: 75px;
+  line-height: 48px;
+  background-color: lightgrey;
+  .mat-icon.start {
+    font-size: 60px;
+    width: 75px;
+    height: 50px;
+    line-height: 48px;
+  }
+}
+.mat-icon-button.stop {
+  width: 75px;
+  height: 75px;
+  line-height: 48px;
+  background-color: grey;
+  .mat-icon.stop {
+    font-size: 60px;
+    width: 75px;
+    height: 50px;
+    line-height: 48px;
+    color: lightgrey;
+  }
+}

@@ -13,7 +13,7 @@ const CusNumSchema = mongoose.Schema({
   },
   username: {
     type: String,
-  },
+  }
 });
   
 

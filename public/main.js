@@ -28,12 +28,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var jsqr__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jsqr */ "7Ozu");
 /* harmony import */ var jsqr__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(jsqr__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _dialog_dialog_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../dialog/dialog.component */ "BTfv");
-/* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/material/dialog */ "0IaG");
-/* harmony import */ var _services_customers_num_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../services/customers_num.service */ "Zfc8");
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! sweetalert2 */ "PSD3");
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_8__);
-
+/* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/material/dialog */ "0IaG");
+/* harmony import */ var _services_customers_num_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../services/customers_num.service */ "Zfc8");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! sweetalert2 */ "PSD3");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_7__);
 
 
 
@@ -50,10 +48,27 @@ let QrscanComponent = class QrscanComponent {
     toggleVideoMedia() {
         if (this.isActive()) {
             this.stopVideo();
+            sweetalert2__WEBPACK_IMPORTED_MODULE_7___default.a.fire({
+                title: '카메라',
+                text: '작동 중지',
+                icon: 'success',
+                confirmButtonText: '확인',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.reload();
+                }
+            });
         }
         else {
             this.startVideo();
-        }
+            sweetalert2__WEBPACK_IMPORTED_MODULE_7___default.a.fire({
+                title: '카메라',
+                text: '작동 시작',
+                timer: 2000,
+                icon: 'success',
+                confirmButtonText: '확인',
+            });
+        } //swal
     }
     startVideo() {
         navigator.mediaDevices
@@ -105,19 +120,22 @@ let QrscanComponent = class QrscanComponent {
                 inversionAttempts: 'dontInvert',
             });
             if (qrcode && qrcode.data.length !== 0) {
-                this.openDialog(qrcode);
+                this.manageSubmit(qrcode.data);
+                setTimeout(() => {
+                    this.processImage();
+                }, 7000);
             }
             else {
                 setTimeout(() => {
                     this.processImage();
-                }, 100);
+                }, 3000);
             }
         }
     }
     manageSubmit(values) {
         this.customer1Service.addCustomerNum(values).subscribe((data) => {
             if (data.success) {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_8___default.a.fire({
+                sweetalert2__WEBPACK_IMPORTED_MODULE_7___default.a.fire({
                     title: data.title,
                     text: data.msg,
                     icon: 'success',
@@ -125,7 +143,7 @@ let QrscanComponent = class QrscanComponent {
                 });
             }
             else {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_8___default.a.fire({
+                sweetalert2__WEBPACK_IMPORTED_MODULE_7___default.a.fire({
                     title: data.title,
                     text: data.msg,
                     icon: 'error',
@@ -134,22 +152,10 @@ let QrscanComponent = class QrscanComponent {
             }
         });
     }
-    openDialog(qrcode) {
-        const dialogRef = this.dialog.open(_dialog_dialog_component__WEBPACK_IMPORTED_MODULE_5__["DialogComponent"], {
-            width: '400px',
-            data: { qrcode: qrcode },
-        });
-        dialogRef.afterClosed().subscribe((result) => {
-            if (this.isActive()) {
-                this.processImage();
-                this.manageSubmit(qrcode.data);
-            }
-        });
-    }
 };
 QrscanComponent.ctorParameters = () => [
-    { type: _services_customers_num_service__WEBPACK_IMPORTED_MODULE_7__["CustomerNumService"] },
-    { type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__["MatDialog"] }
+    { type: _services_customers_num_service__WEBPACK_IMPORTED_MODULE_6__["CustomerNumService"] },
+    { type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__["MatDialog"] }
 ];
 QrscanComponent.propDecorators = {
     videoElement: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ViewChild"], args: ['video',] }],
@@ -164,6 +170,19 @@ QrscanComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 ], QrscanComponent);
 
 
+
+/***/ }),
+
+/***/ "2iP8":
+/*!***********************************************************!*\
+  !*** ./src/app/components/qrscan1/qrscan1.component.scss ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (".mat-icon-button.start {\n  width: 75px;\n  height: 75px;\n  line-height: 48px;\n  background-color: lightgrey;\n}\n.mat-icon-button.start .mat-icon.start {\n  font-size: 60px;\n  width: 75px;\n  height: 50px;\n  line-height: 48px;\n}\n.mat-icon-button.stop {\n  width: 75px;\n  height: 75px;\n  line-height: 48px;\n  background-color: grey;\n}\n.mat-icon-button.stop .mat-icon.stop {\n  font-size: 60px;\n  width: 75px;\n  height: 50px;\n  line-height: 48px;\n  color: lightgrey;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFxxcnNjYW4xLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsV0FBQTtFQUNBLFlBQUE7RUFDQSxpQkFBQTtFQUNBLDJCQUFBO0FBQ0Y7QUFBRTtFQUNFLGVBQUE7RUFDQSxXQUFBO0VBQ0EsWUFBQTtFQUNBLGlCQUFBO0FBRUo7QUFDQTtFQUNFLFdBQUE7RUFDQSxZQUFBO0VBQ0EsaUJBQUE7RUFDQSxzQkFBQTtBQUVGO0FBREU7RUFDRSxlQUFBO0VBQ0EsV0FBQTtFQUNBLFlBQUE7RUFDQSxpQkFBQTtFQUNBLGdCQUFBO0FBR0oiLCJmaWxlIjoicXJzY2FuMS5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5tYXQtaWNvbi1idXR0b24uc3RhcnQge1xyXG4gIHdpZHRoOiA3NXB4O1xyXG4gIGhlaWdodDogNzVweDtcclxuICBsaW5lLWhlaWdodDogNDhweDtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiBsaWdodGdyZXk7XHJcbiAgLm1hdC1pY29uLnN0YXJ0IHtcclxuICAgIGZvbnQtc2l6ZTogNjBweDtcclxuICAgIHdpZHRoOiA3NXB4O1xyXG4gICAgaGVpZ2h0OiA1MHB4O1xyXG4gICAgbGluZS1oZWlnaHQ6IDQ4cHg7XHJcbiAgfVxyXG59XHJcbi5tYXQtaWNvbi1idXR0b24uc3RvcCB7XHJcbiAgd2lkdGg6IDc1cHg7XHJcbiAgaGVpZ2h0OiA3NXB4O1xyXG4gIGxpbmUtaGVpZ2h0OiA0OHB4O1xyXG4gIGJhY2tncm91bmQtY29sb3I6IGdyZXk7XHJcbiAgLm1hdC1pY29uLnN0b3Age1xyXG4gICAgZm9udC1zaXplOiA2MHB4O1xyXG4gICAgd2lkdGg6IDc1cHg7XHJcbiAgICBoZWlnaHQ6IDUwcHg7XHJcbiAgICBsaW5lLWhlaWdodDogNDhweDtcclxuICAgIGNvbG9yOiBsaWdodGdyZXk7XHJcbiAgfVxyXG59XHJcbiJdfQ== */");
 
 /***/ }),
 
@@ -313,19 +332,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "8tFE":
-/*!***********************************************************************************************!*\
-  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/dialog/dialog.component.html ***!
-  \***********************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<h3 mat-dialog-title>대기 등록을 하시겠습니까?</h3>\n<mat-dialog-actions>\n  <button mat-button [mat-dialog-close]=\"true\">네</button>\n</mat-dialog-actions>\n");
-
-/***/ }),
-
 /***/ "A2xt":
 /*!*************************************************************************************************************!*\
   !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/businesslogin/businesslogin.component.html ***!
@@ -438,52 +444,6 @@ const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
-
-
-/***/ }),
-
-/***/ "BTfv":
-/*!*******************************************************!*\
-  !*** ./src/app/components/dialog/dialog.component.ts ***!
-  \*******************************************************/
-/*! exports provided: DialogComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DialogComponent", function() { return DialogComponent; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
-/* harmony import */ var _raw_loader_dialog_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./dialog.component.html */ "8tFE");
-/* harmony import */ var _dialog_component_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dialog.component.scss */ "nVAb");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/material/dialog */ "0IaG");
-
-
-
-
-
-let DialogComponent = class DialogComponent {
-    constructor(dialogRef, data) {
-        this.dialogRef = dialogRef;
-        this.data = data;
-    }
-    ngOnInit() { }
-    onNoClick() {
-        this.dialogRef.close();
-    }
-};
-DialogComponent.ctorParameters = () => [
-    { type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_4__["MatDialogRef"] },
-    { type: undefined, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Inject"], args: [_angular_material_dialog__WEBPACK_IMPORTED_MODULE_4__["MAT_DIALOG_DATA"],] }] }
-];
-DialogComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
-        selector: 'app-dialog',
-        template: _raw_loader_dialog_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
-        styles: [_dialog_component_scss__WEBPACK_IMPORTED_MODULE_2__["default"]]
-    })
-], DialogComponent);
-
 
 
 /***/ }),
@@ -664,6 +624,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "MonW":
+/*!*************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/qrscan1/qrscan1.component.html ***!
+  \*************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<br />\n<button\n  *ngIf=\"!isActive()\"\n  mat-icon-button class=\"start\"\n  (click)=\"toggleVideoMedia()\"\n  [disabled]=\"isActive()\"\n  color=\"primary\"\n  aria-label=\"videocam icon-button\"\n>\n  <mat-icon class=\"start\">qr_code_scanner</mat-icon>\n</button>\n\n<button\n  *ngIf=\"isActive()\"\n  mat-icon-button class=\"stop\"\n  (click)=\"toggleVideoMedia()\"\n  [disabled]=\"!isActive()\"\n  color=\"warn\"\n  aria-label=\"videocam icon-button\"\n>\n  <mat-icon class=\"stop\">qr_code_scanner</mat-icon>\n</button>\n<br />\n<video #video autoplay muted playsinline width=\"640\" height=\"480\"></video>\n<canvas #canvas hidden></canvas>\n");
+
+/***/ }),
+
 /***/ "NRKP":
 /*!***********************************************************************************************!*\
   !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/Qrscan/qrscan.component.html ***!
@@ -673,7 +646,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<button *ngIf=\"!isActive()\" mat-fab (click)=\"toggleVideoMedia()\" [disabled]=\"isActive()\" color=\"primary\" aria-label=\"videocam icon-button\">\n  <mat-icon>videocam</mat-icon>\n</button>\n\n<button *ngIf=\"isActive()\" mat-fab (click)=\"toggleVideoMedia()\" [disabled]=\"!isActive()\" color=\"warn\" aria-label=\"videocam icon-button\">\n  <mat-icon>videocam_off</mat-icon>\n</button>\n<br>\n<video #video autoplay muted playsinline width=\"640\" height=\"480\"></video>\n<canvas #canvas hidden></canvas>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<br />\n<button\n  *ngIf=\"!isActive()\"\n  mat-icon-button\n  class=\"start\"\n  (click)=\"toggleVideoMedia()\"\n  [disabled]=\"isActive()\"\n  color=\"primary\"\n  aria-label=\"videocam icon-button\"\n>\n  <mat-icon class=\"start\">qr_code_scanner</mat-icon>\n</button>\n\n<button\n  *ngIf=\"isActive()\"\n  mat-icon-button\n  class=\"stop\"\n  (click)=\"toggleVideoMedia()\"\n  [disabled]=\"!isActive()\"\n  color=\"warn\"\n  aria-label=\"videocam icon-button\"\n>\n  <mat-icon class=\"stop\">qr_code_scanner</mat-icon>\n</button>\n<br />\n<video #video autoplay muted playsinline width=\"640\" height=\"480\"></video>\n<canvas #canvas hidden></canvas>\n");
 
 /***/ }),
 
@@ -699,7 +672,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">\n  <a class=\"navbar-brand\" href=\"/\">Qyaho은행 사업자전용</a>\n  <button\n    class=\"navbar-toggler\"\n    type=\"button\"\n    data-toggle=\"collapse\"\n    data-target=\"#navbarSupportedContent\"\n    aria-controls=\"navbarSupportedContent\"\n    aria-expanded=\"false\"\n    aria-label=\"Toggle navigation\"\n  >\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n    <ul class=\"navbar-nav ml-auto\">\n      <li *ngIf=\"!checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/business\">사업자 회원가입</a>\n      </li>\n\n      <li *ngIf=\"!checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/businesslogin\">사업자 로그인</a>\n      </li>\n\n      <li *ngIf=\"checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/Customer_list\">회원 목록 관리</a>\n      </li>\n\n      <li *ngIf=\"checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/Customer_Num\">대기 순번 관리</a>\n      </li>\n\n      <li *ngIf=\"checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/qrscan\">대기 순번 등록</a>\n      </li>\n\n      <li *ngIf=\"checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/qrscan\">대기 서비스 제공</a>\n      </li>\n\n      <li *ngIf=\"checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" (click)=\"onLogoutClick()\" href=\"#\">로그아웃</a>\n      </li>\n    </ul>\n  </div>\n</nav>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">\n  <a class=\"navbar-brand\" href=\"/\">Qyaho은행 사업자전용</a>\n  <button\n    class=\"navbar-toggler\"\n    type=\"button\"\n    data-toggle=\"collapse\"\n    data-target=\"#navbarSupportedContent\"\n    aria-controls=\"navbarSupportedContent\"\n    aria-expanded=\"false\"\n    aria-label=\"Toggle navigation\"\n  >\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n    <ul class=\"navbar-nav ml-auto\">\n      <li *ngIf=\"!checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/business\">사업자 회원가입</a>\n      </li>\n\n      <li *ngIf=\"!checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/businesslogin\">사업자 로그인</a>\n      </li>\n\n      <li *ngIf=\"checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/Customer_list\">회원 목록 관리</a>\n      </li>\n\n      <li *ngIf=\"checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/Customer_Num\">대기 순번 관리</a>\n      </li>\n\n      <li *ngIf=\"checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/qrscan\">대기 순번 등록</a>\n      </li>\n\n      <li *ngIf=\"checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/qrscan1\">대기 서비스 제공</a>\n      </li>\n\n      <li *ngIf=\"checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" (click)=\"onLogoutClick()\" href=\"#\">로그아웃</a>\n      </li>\n    </ul>\n  </div>\n</nav>\n");
 
 /***/ }),
 
@@ -811,24 +784,10 @@ let CustomersService = class CustomersService {
     getCustomers() {
         return this.http.get(this.API_URL, httpOptions);
     }
-    getCustomer(id) {
-        return this.http.get(this.API_URL + `${id}`, httpOptions);
-    }
-    addCustomer(user) {
-        return this.http.post(this.API_URL, user, httpOptions);
-    }
-    editCustomer(id, user) {
-        return this.http
-            .put(this.API_URL + `${id}`, user, httpOptions)
-            .subscribe();
-    }
     deleteCustomer(id) {
         return this.http
             .delete(this.API_URL + `${id}`, httpOptions)
             .subscribe();
-    }
-    getCustomerNums() {
-        return this.http.get(this.API_URL, httpOptions);
     }
 };
 CustomersService.ctorParameters = () => [
@@ -879,7 +838,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJxcnNjYW4uY29tcG9uZW50LmNzcyJ9 */");
+/* harmony default export */ __webpack_exports__["default"] = (".mat-icon-button.start {\r\n  width: 75px;\r\n  height: 75px;\r\n  line-height: 48px;\r\n  background-color: lightgrey;\r\n}\r\n.mat-icon.start {\r\n  font-size: 60px;\r\n  width: 75px;\r\n  height: 50px;\r\n  line-height: 48px;\r\n}\r\n.mat-icon-button.stop {\r\n  width: 75px;\r\n  height: 75px;\r\n  line-height: 48px;\r\n  background-color: grey;\r\n}\r\n.mat-icon.stop {\r\n  font-size: 60px;\r\n  width: 75px;\r\n  height: 50px;\r\n  line-height: 48px;\r\n  color: lightgrey;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInFyc2Nhbi5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsV0FBVztFQUNYLFlBQVk7RUFDWixpQkFBaUI7RUFDakIsMkJBQTJCO0FBQzdCO0FBQ0E7RUFDRSxlQUFlO0VBQ2YsV0FBVztFQUNYLFlBQVk7RUFDWixpQkFBaUI7QUFDbkI7QUFDQTtFQUNFLFdBQVc7RUFDWCxZQUFZO0VBQ1osaUJBQWlCO0VBQ2pCLHNCQUFzQjtBQUN4QjtBQUNBO0VBQ0UsZUFBZTtFQUNmLFdBQVc7RUFDWCxZQUFZO0VBQ1osaUJBQWlCO0VBQ2pCLGdCQUFnQjtBQUNsQiIsImZpbGUiOiJxcnNjYW4uY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5tYXQtaWNvbi1idXR0b24uc3RhcnQge1xyXG4gIHdpZHRoOiA3NXB4O1xyXG4gIGhlaWdodDogNzVweDtcclxuICBsaW5lLWhlaWdodDogNDhweDtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiBsaWdodGdyZXk7XHJcbn1cclxuLm1hdC1pY29uLnN0YXJ0IHtcclxuICBmb250LXNpemU6IDYwcHg7XHJcbiAgd2lkdGg6IDc1cHg7XHJcbiAgaGVpZ2h0OiA1MHB4O1xyXG4gIGxpbmUtaGVpZ2h0OiA0OHB4O1xyXG59XHJcbi5tYXQtaWNvbi1idXR0b24uc3RvcCB7XHJcbiAgd2lkdGg6IDc1cHg7XHJcbiAgaGVpZ2h0OiA3NXB4O1xyXG4gIGxpbmUtaGVpZ2h0OiA0OHB4O1xyXG4gIGJhY2tncm91bmQtY29sb3I6IGdyZXk7XHJcbn1cclxuLm1hdC1pY29uLnN0b3Age1xyXG4gIGZvbnQtc2l6ZTogNjBweDtcclxuICB3aWR0aDogNzVweDtcclxuICBoZWlnaHQ6IDUwcHg7XHJcbiAgbGluZS1oZWlnaHQ6IDQ4cHg7XHJcbiAgY29sb3I6IGxpZ2h0Z3JleTtcclxufVxyXG4iXX0= */");
 
 /***/ }),
 
@@ -986,7 +945,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Qrscan_qrscan_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./components/Qrscan/qrscan.component */ "1MMG");
 /* harmony import */ var _components_pic_slide_pic_slide_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./components/pic-slide/pic-slide.component */ "I+a1");
 /* harmony import */ var _components_footer_footer_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./components/footer/footer.component */ "LmEr");
-/* harmony import */ var _components_dialog_dialog_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./components/dialog/dialog.component */ "BTfv");
+/* harmony import */ var _components_qrscan1_qrscan1_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./components/qrscan1/qrscan1.component */ "p//8");
 /* harmony import */ var _services_validate_service__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./services/validate.service */ "hFt3");
 /* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./services/auth.service */ "lGQG");
 
@@ -1035,7 +994,7 @@ AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
             _components_Qrscan_qrscan_component__WEBPACK_IMPORTED_MODULE_22__["QrscanComponent"],
             _components_pic_slide_pic_slide_component__WEBPACK_IMPORTED_MODULE_23__["PicSlideComponent"],
             _components_footer_footer_component__WEBPACK_IMPORTED_MODULE_24__["FooterComponent"],
-            _components_dialog_dialog_component__WEBPACK_IMPORTED_MODULE_25__["DialogComponent"]
+            _components_qrscan1_qrscan1_component__WEBPACK_IMPORTED_MODULE_25__["Qrscan1Component"]
         ],
         imports: [
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"],
@@ -1104,16 +1063,8 @@ let CustomerNumService = class CustomerNumService {
     getCustomerNums() {
         return this.http.get(this.API_URL, httpOptions);
     }
-    getCustomerNum(id) {
-        return this.http.get(this.API_URL + `${id}`, httpOptions);
-    }
     addCustomerNum(Cus_num) {
         return this.http.post(this.API_URL, Cus_num, httpOptions);
-    }
-    editCustomerNum(id, Cus_num) {
-        return this.http
-            .put(this.API_URL + `${id}`, Cus_num, httpOptions)
-            .subscribe();
     }
     deleteCustomerNum(id) {
         return this.http
@@ -1161,11 +1112,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _raw_loader_customer_list_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./customer-list.component.html */ "8Zne");
 /* harmony import */ var _customer_list_component_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./customer-list.component.scss */ "NtNI");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var _models_User__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../models/User */ "vmXk");
-/* harmony import */ var _services_customers_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/customers.service */ "UrgT");
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! sweetalert2 */ "PSD3");
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_6__);
-
+/* harmony import */ var _services_customers_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/customers.service */ "UrgT");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! sweetalert2 */ "PSD3");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_5__);
 
 
 
@@ -1173,62 +1122,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let CustomerListComponent = class CustomerListComponent {
-    constructor(customer1Service) {
-        this.customer1Service = customer1Service;
+    constructor(customersService) {
+        this.customersService = customersService;
         this.customers = [];
-        this.selectedCustomer = new _models_User__WEBPACK_IMPORTED_MODULE_4__["User"]();
         this.customersQuantity = 0;
-        this.customer1Service.getCustomers().subscribe((data) => {
+    }
+    ngOnInit() {
+        this.customersService.getCustomers().subscribe((data) => {
             this.customers = data;
             this.customersQuantity = data.length;
         });
-        // this.employeeForm = this._builder.group({
-        //   first_name: ["", Validators.required],
-        //   last_name: ["", Validators.required],
-        //   email: ["", Validators.compose([Validators.required, Validators.email])],
-        //   avatar: ["", Validators.required],
-        // });
     }
-    ngOnInit() { }
-    _blankControls() {
-        this.customerForm.get('name').reset();
-        this.customerForm.get('email').reset();
-        this.customerForm.get('username').reset();
-        this.customerForm.get('password').reset();
-        this.customerForm.get('birth').reset();
-    }
-    manageSubmit(values) {
-        if (this.selectedCustomer._id === undefined) {
-            this.customer1Service.addCustomer(values).subscribe((data) => {
-                return this.customers.push(data);
-            });
-            this.customersQuantity = this.customersQuantity + 1;
-            sweetalert2__WEBPACK_IMPORTED_MODULE_6___default.a.fire({
-                title: '예약 성공! ',
-                icon: 'success',
-                confirmButtonText: 'Cool',
-            });
-        }
-        else {
-            this.customer1Service.editCustomer(this.selectedCustomer._id, values);
-            const index = this.customers.findIndex((user) => user._id === this.selectedCustomer._id);
-            this.customers[index].name = this.customerForm.get('first_name').value;
-            this.customers[index].email = this.customerForm.get('last_name').value;
-            this.customers[index].username = this.customerForm.get('email').value;
-            this.customers[index].password = this.customerForm.get('avatar').value;
-            this.customers[index].birth = this.customerForm.get('avatar').value;
-            sweetalert2__WEBPACK_IMPORTED_MODULE_6___default.a.fire({
-                title: '예약이 수정되었습니다!',
-                icon: 'success',
-                confirmButtonText: 'Cool',
-            });
-        }
-        this.selectedCustomer = new _models_User__WEBPACK_IMPORTED_MODULE_4__["User"]();
-        this._blankControls();
-    }
-    // 수정, 삭제
+    //회원 삭제
     deleteCustomer(id) {
-        sweetalert2__WEBPACK_IMPORTED_MODULE_6___default.a.fire({
+        sweetalert2__WEBPACK_IMPORTED_MODULE_5___default.a.fire({
             title: '회원 삭제',
             text: '정말로 회원을 삭제 하시겠습니까?',
             icon: 'warning',
@@ -1238,24 +1145,16 @@ let CustomerListComponent = class CustomerListComponent {
             confirmButtonText: '확인',
         }).then((result) => {
             if (result.value) {
-                this.customer1Service.deleteCustomer(id);
+                this.customersService.deleteCustomer(id);
                 this.customers = this.customers.filter((customer) => customer._id !== id);
                 this.customersQuantity = this.customersQuantity - 1;
-                sweetalert2__WEBPACK_IMPORTED_MODULE_6___default.a.fire('성공!', '회원을 정상적으로 삭제했습니다.', 'success');
+                sweetalert2__WEBPACK_IMPORTED_MODULE_5___default.a.fire('성공!', '회원을 정상적으로 삭제했습니다.', 'success');
             }
         });
     }
-    editCustomer(customer) {
-        this.selectedCustomer = customer;
-        this.customerForm.get('first_name').setValue(this.selectedCustomer.name);
-        this.customerForm.get('last_name').setValue(this.selectedCustomer.email);
-        this.customerForm.get('email').setValue(this.selectedCustomer.username);
-        this.customerForm.get('avatar').setValue(this.selectedCustomer.password);
-        this.customerForm.get('avatar').setValue(this.selectedCustomer.birth);
-    }
 };
 CustomerListComponent.ctorParameters = () => [
-    { type: _services_customers_service__WEBPACK_IMPORTED_MODULE_5__["CustomersService"] }
+    { type: _services_customers_service__WEBPACK_IMPORTED_MODULE_4__["CustomersService"] }
 ];
 CustomerListComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
@@ -1436,6 +1335,22 @@ let AuthService = class AuthService {
         // 2. Heroku 클라우드 서버에 포팅시
         return ep;
     }
+    loggedIn() {
+        return !this.jwtHelper.isTokenExpired(this.authToken);
+    }
+    logout() {
+        this.authToken = null;
+        this.userNoPW = null;
+        localStorage.clear();
+    }
+    businessUser(businessuser) {
+        const BusinessUrl = this.prepEndpoint('businesses/cos');
+        return this.http.post(BusinessUrl, businessuser, httpOptions);
+    }
+    authenticatebusiness(businesslogin) {
+        const BloginUrl = this.prepEndpoint('businesses/authenticate');
+        return this.http.post(BloginUrl, businesslogin, httpOptions);
+    }
     storeUserData(token, userNoPW) {
         localStorage.setItem('id_token', token);
         localStorage.setItem('business', JSON.stringify(userNoPW));
@@ -1450,24 +1365,8 @@ let AuthService = class AuthService {
                 Authorization: 'Bearer ' + this.authToken,
             }),
         };
-        const profileUrl = this.prepEndpoint('users/profile');
+        const profileUrl = this.prepEndpoint('businesses/profile');
         return this.http.get(profileUrl, httpOptions1);
-    }
-    logout() {
-        this.authToken = null;
-        this.userNoPW = null;
-        localStorage.clear();
-    }
-    loggedIn() {
-        return !this.jwtHelper.isTokenExpired(this.authToken);
-    }
-    businessUser(businessuser) {
-        const BusinessUrl = this.prepEndpoint('businesses/cos');
-        return this.http.post(BusinessUrl, businessuser, httpOptions);
-    }
-    authenticatebusiness(businesslogin) {
-        const BloginUrl = this.prepEndpoint('businesses/authenticate');
-        return this.http.post(BloginUrl, businesslogin, httpOptions);
     }
 };
 AuthService.ctorParameters = () => [
@@ -1484,16 +1383,164 @@ AuthService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 /***/ }),
 
-/***/ "nVAb":
+/***/ "p//8":
 /*!*********************************************************!*\
-  !*** ./src/app/components/dialog/dialog.component.scss ***!
+  !*** ./src/app/components/qrscan1/qrscan1.component.ts ***!
   \*********************************************************/
-/*! exports provided: default */
+/*! exports provided: Qrscan1Component */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".mat-dialog-actions {\n  justify-content: flex-end;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFxkaWFsb2cuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSx5QkFBQTtBQUNKIiwiZmlsZSI6ImRpYWxvZy5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5tYXQtZGlhbG9nLWFjdGlvbnMge1xuICAgIGp1c3RpZnktY29udGVudDogZmxleC1lbmQ7XG4gIH1cbiAgIl19 */");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Qrscan1Component", function() { return Qrscan1Component; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _raw_loader_qrscan1_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./qrscan1.component.html */ "MonW");
+/* harmony import */ var _qrscan1_component_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./qrscan1.component.scss */ "2iP8");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var jsqr__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jsqr */ "7Ozu");
+/* harmony import */ var jsqr__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(jsqr__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/material/dialog */ "0IaG");
+/* harmony import */ var _services_customers_num_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../services/customers_num.service */ "Zfc8");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! sweetalert2 */ "PSD3");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_7__);
+
+
+
+
+
+
+
+
+let Qrscan1Component = class Qrscan1Component {
+    constructor(customer1Service, dialog) {
+        this.customer1Service = customer1Service;
+        this.dialog = dialog;
+    }
+    toggleVideoMedia() {
+        if (this.isActive()) {
+            this.stopVideo();
+            sweetalert2__WEBPACK_IMPORTED_MODULE_7___default.a.fire({
+                title: '카메라',
+                text: '작동 중지',
+                icon: 'success',
+                confirmButtonText: '확인',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.reload();
+                }
+            });
+        }
+        else {
+            this.startVideo();
+            sweetalert2__WEBPACK_IMPORTED_MODULE_7___default.a.fire({
+                title: '카메라',
+                text: '작동 시작',
+                timer: 2000,
+                icon: 'success',
+                confirmButtonText: '확인',
+            });
+        } //swal
+    }
+    startVideo() {
+        navigator.mediaDevices
+            .enumerateDevices()
+            .then((mediaDeviceInfoList) => {
+            console.log(mediaDeviceInfoList);
+            const videoDevices = mediaDeviceInfoList.filter((deviceInfo) => deviceInfo.kind === 'videoinput');
+            if (videoDevices.length === 0) {
+                throw new Error('no video input devices');
+            }
+            return navigator.mediaDevices.getUserMedia({
+                audio: false,
+                video: {
+                    deviceId: videoDevices[0].deviceId,
+                    autoGainControl: true,
+                    width: 960,
+                    height: 640,
+                },
+            });
+        })
+            .then((mediaStream) => {
+            this.stream = mediaStream;
+            if (this.videoElement) {
+                this.videoElement.nativeElement.srcObject = mediaStream;
+                this.processImage();
+            }
+        })
+            .catch((error) => {
+            console.error(error);
+        });
+    }
+    stopVideo() {
+        if (this.stream) {
+            this.stream.getVideoTracks()[0].stop();
+        }
+    }
+    isActive() {
+        return this.stream !== undefined && this.stream.active;
+    }
+    processImage() {
+        if (this.videoElement && this.canvasElement && this.isActive()) {
+            const width = this.canvasElement.nativeElement.width;
+            const height = this.canvasElement.nativeElement.height;
+            const context = this.canvasElement.nativeElement.getContext('2d');
+            context.drawImage(this.videoElement.nativeElement, 0, 0, width, height);
+            const imageData = context.getImageData(0, 0, width, height);
+            //console.log(imageData);
+            const qrcode = jsqr__WEBPACK_IMPORTED_MODULE_4___default()(imageData.data, imageData.width, imageData.height, {
+                inversionAttempts: 'dontInvert',
+            });
+            if (qrcode && qrcode.data.length !== 0) {
+                this.manageSubmit(qrcode.data);
+                setTimeout(() => {
+                    this.processImage();
+                }, 7000);
+            }
+            else {
+                setTimeout(() => {
+                    this.processImage();
+                }, 3000);
+            }
+        }
+    }
+    manageSubmit(values) {
+        this.customer1Service.addCustomerNum(values).subscribe((data) => {
+            if (data.success) {
+                sweetalert2__WEBPACK_IMPORTED_MODULE_7___default.a.fire({
+                    title: data.title,
+                    text: data.msg,
+                    icon: 'success',
+                    confirmButtonText: '확인',
+                });
+            }
+            else {
+                sweetalert2__WEBPACK_IMPORTED_MODULE_7___default.a.fire({
+                    title: data.title,
+                    text: data.msg,
+                    icon: 'error',
+                    confirmButtonText: '확인',
+                });
+            }
+        });
+    }
+};
+Qrscan1Component.ctorParameters = () => [
+    { type: _services_customers_num_service__WEBPACK_IMPORTED_MODULE_6__["CustomerNumService"] },
+    { type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__["MatDialog"] }
+];
+Qrscan1Component.propDecorators = {
+    videoElement: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ViewChild"], args: ['video',] }],
+    canvasElement: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ViewChild"], args: ['canvas',] }]
+};
+Qrscan1Component = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
+        selector: 'app-qrscan1',
+        template: _raw_loader_qrscan1_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
+        styles: [_qrscan1_component_scss__WEBPACK_IMPORTED_MODULE_2__["default"]]
+    })
+], Qrscan1Component);
+
+
 
 /***/ }),
 
@@ -1556,6 +1603,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_businesslogin_businesslogin_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/businesslogin/businesslogin.component */ "AQa0");
 /* harmony import */ var _components_customer_list_customer_list_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/customer-list/customer-list.component */ "f86t");
 /* harmony import */ var _components_Qrscan_qrscan_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Qrscan/qrscan.component */ "1MMG");
+/* harmony import */ var _components_qrscan1_qrscan1_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/qrscan1/qrscan1.component */ "p//8");
+
 
 
 
@@ -1574,6 +1623,7 @@ const routes = [
     { path: 'businesslogin', component: _components_businesslogin_businesslogin_component__WEBPACK_IMPORTED_MODULE_7__["BusinessloginComponent"] },
     { path: 'Customer_list', component: _components_customer_list_customer_list_component__WEBPACK_IMPORTED_MODULE_8__["CustomerListComponent"] },
     { path: 'qrscan', component: _components_Qrscan_qrscan_component__WEBPACK_IMPORTED_MODULE_9__["QrscanComponent"] },
+    { path: 'qrscan1', component: _components_qrscan1_qrscan1_component__WEBPACK_IMPORTED_MODULE_10__["Qrscan1Component"] },
     { path: '**', component: _components_home_home_component__WEBPACK_IMPORTED_MODULE_4__["HomeComponent"] },
 ];
 let AppRoutingModule = class AppRoutingModule {
@@ -1585,34 +1635,6 @@ AppRoutingModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     })
 ], AppRoutingModule);
 
-
-
-/***/ }),
-
-/***/ "vmXk":
-/*!********************************!*\
-  !*** ./src/app/models/User.ts ***!
-  \********************************/
-/*! exports provided: User, Login, UserNoPW, business, Businesslogin */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "User", function() { return User; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Login", function() { return Login; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserNoPW", function() { return UserNoPW; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "business", function() { return business; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Businesslogin", function() { return Businesslogin; });
-class User {
-}
-class Login {
-}
-class UserNoPW {
-}
-class business {
-}
-class Businesslogin {
-}
 
 
 /***/ }),
