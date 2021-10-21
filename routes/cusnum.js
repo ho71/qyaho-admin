@@ -82,7 +82,7 @@ router.post("/cus_nums1", async (req, res) => {
   }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/cus_nums/:id", async (req, res) => {
   await Cus_num.findByIdAndDelete(req.params.id);
   res.json({
     message: "ok",
