@@ -21,6 +21,12 @@
       <li *ngIf="!checkLoggedIn()" class="nav-item">
         <a class="nav-link" routerLink="/businesslogin">사업자 로그인</a>
       </li>
+    </ul>
+
+    <ul class="navbar-nav ml-auto">
+      <li *ngIf="checkLoggedIn()" class="nav-item">
+        <a class="nav-link" routerLink="/list">대기 리스트</a>
+      </li>
 
       <li *ngIf="checkLoggedIn()" class="nav-item">
         <a class="nav-link" routerLink="/Customer_list">회원 목록 관리</a>

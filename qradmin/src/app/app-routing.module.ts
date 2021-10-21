@@ -9,6 +9,7 @@ import { BusinessloginComponent } from './components/businesslogin/businesslogin
 import { CustomerListComponent } from './components/customer-list/customer-list.component';
 import { QrscanComponent } from './components/Qrscan/qrscan.component';
 import { Qrscan1Component } from './components/qrscan1/qrscan1.component';
+import { ListComponent } from './components/list/list.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'business', component: BusinessComponent },
   { path: 'businesslogin', component: BusinessloginComponent },
   { path: 'Customer_list', component: CustomerListComponent },
+  { path: 'list', component: ListComponent },
   { path: 'qrscan', component: QrscanComponent },
   { path: 'qrscan1', component: Qrscan1Component },
   { path: '**', component: HomeComponent },

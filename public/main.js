@@ -187,6 +187,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "4Xum":
+/*!*******************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/list/list.component.html ***!
+  \*******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<br />\n<div\n  style=\"\n    text-align: center;\n    vertical-align: top;\n    border: 1px solid peachpuff;\n    border-radius: 60px;\n    padding-top: 10px;\n    background-color: peachpuff;\n  \"\n>\n  <h1 style=\"padding-top: 10px; padding-bottom: 10px\">\n    어서오세요! Qyaho 은행입니다.\n  </h1>\n</div>\n<br />\n\n<div\n  style=\"\n    text-align: center;\n    vertical-align: top;\n    border: 1px solid black;\n    border-radius: 5px;\n    padding: 10px;\n    background-color: rgb(255, 255, 227);\n  \"\n>\n  <div>\n    <h2 class=\"waitpeople\">\n      현재 대기자 수는 {{ customersQuantity }}명 입니다.\n    </h2>\n    <h2 class=\"waitpeople\">\n      예상 대기 시간은 {{ customersQuantity * 5 }}분 입니다.\n    </h2>\n    <br />\n    <table class=\"table table-bordered\">\n      <thead class=\"thead\">\n        <tr class=\"text-center bg-warning\">\n          <th scope=\"col\">순번</th>\n          <th scope=\"col\">이름</th>\n          <th scope=\"col\">대기 등록 시간</th>\n        </tr>\n      </thead>\n\n      <tbody>\n        <tr *ngFor=\"let customer of customers\">\n          <td class=\"text-center\" style=\"width: 20%\">\n            <h5>{{ customer.no }}</h5>\n          </td>\n          <td class=\"text-center\" style=\"width: 40%\">\n            <h5>{{ customer.name }}</h5>\n          </td>\n          <td class=\"text-center\" style=\"width: 40%\">\n            <h5>{{ customer.time | date: \"MM/dd hh:mm:ss a\" }}</h5>\n          </td>\n        </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n");
+
+/***/ }),
+
 /***/ "6R5h":
 /*!***************************************************************!*\
   !*** ./src/app/components/pic-slide/pic-slide.component.scss ***!
@@ -197,6 +210,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJwaWMtc2xpZGUuY29tcG9uZW50LnNjc3MifQ== */");
+
+/***/ }),
+
+/***/ "6b6X":
+/*!*****************************************************!*\
+  !*** ./src/app/components/list/list.component.scss ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJsaXN0LmNvbXBvbmVudC5zY3NzIn0= */");
 
 /***/ }),
 
@@ -530,6 +556,56 @@ HomeComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 /***/ }),
 
+/***/ "HVfF":
+/*!***************************************************!*\
+  !*** ./src/app/components/list/list.component.ts ***!
+  \***************************************************/
+/*! exports provided: ListComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ListComponent", function() { return ListComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _raw_loader_list_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./list.component.html */ "4Xum");
+/* harmony import */ var _list_component_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./list.component.scss */ "6b6X");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _services_customers_num_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/customers_num.service */ "Zfc8");
+
+
+
+
+
+let ListComponent = class ListComponent {
+    constructor(customer1Service) {
+        this.customer1Service = customer1Service;
+        this.customers = [];
+        this.customersQuantity = 0;
+    }
+    ngOnInit() {
+        setInterval(() => {
+            this.customer1Service.getCustomerNums().subscribe((data) => {
+                this.customers = data;
+                this.customersQuantity = data.length;
+            });
+        }, 1000);
+    }
+};
+ListComponent.ctorParameters = () => [
+    { type: _services_customers_num_service__WEBPACK_IMPORTED_MODULE_4__["CustomerNumService"] }
+];
+ListComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
+        selector: 'app-list-num',
+        template: _raw_loader_list_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
+        styles: [_list_component_scss__WEBPACK_IMPORTED_MODULE_2__["default"]]
+    })
+], ListComponent);
+
+
+
+/***/ }),
+
 /***/ "I+a1":
 /*!*************************************************************!*\
   !*** ./src/app/components/pic-slide/pic-slide.component.ts ***!
@@ -672,7 +748,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">\n  <a class=\"navbar-brand\" href=\"/\">Qyaho은행 사업자전용</a>\n  <button\n    class=\"navbar-toggler\"\n    type=\"button\"\n    data-toggle=\"collapse\"\n    data-target=\"#navbarSupportedContent\"\n    aria-controls=\"navbarSupportedContent\"\n    aria-expanded=\"false\"\n    aria-label=\"Toggle navigation\"\n  >\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n    <ul class=\"navbar-nav ml-auto\">\n      <li *ngIf=\"!checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/business\">사업자 회원가입</a>\n      </li>\n\n      <li *ngIf=\"!checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/businesslogin\">사업자 로그인</a>\n      </li>\n\n      <li *ngIf=\"checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/Customer_list\">회원 목록 관리</a>\n      </li>\n\n      <li *ngIf=\"checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/Customer_Num\">대기 순번 관리</a>\n      </li>\n\n      <li *ngIf=\"checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/qrscan\">대기 순번 등록</a>\n      </li>\n\n      <li *ngIf=\"checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/qrscan1\">대기 서비스 제공</a>\n      </li>\n\n      <li *ngIf=\"checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" (click)=\"onLogoutClick()\" href=\"#\">로그아웃</a>\n      </li>\n    </ul>\n  </div>\n</nav>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">\n  <a class=\"navbar-brand\" href=\"/\">Qyaho은행 사업자전용</a>\n  <button\n    class=\"navbar-toggler\"\n    type=\"button\"\n    data-toggle=\"collapse\"\n    data-target=\"#navbarSupportedContent\"\n    aria-controls=\"navbarSupportedContent\"\n    aria-expanded=\"false\"\n    aria-label=\"Toggle navigation\"\n  >\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n    <ul class=\"navbar-nav ml-auto\">\n      <li *ngIf=\"!checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/business\">사업자 회원가입</a>\n      </li>\n\n      <li *ngIf=\"!checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/businesslogin\">사업자 로그인</a>\n      </li>\n    </ul>\n\n    <ul class=\"navbar-nav ml-auto\">\n      <li *ngIf=\"checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/list\">대기 리스트</a>\n      </li>\n\n      <li *ngIf=\"checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/Customer_list\">회원 목록 관리</a>\n      </li>\n\n      <li *ngIf=\"checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/Customer_Num\">대기 순번 관리</a>\n      </li>\n\n      <li *ngIf=\"checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/qrscan\">대기 순번 등록</a>\n      </li>\n\n      <li *ngIf=\"checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/qrscan1\">대기 서비스 제공</a>\n      </li>\n\n      <li *ngIf=\"checkLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" (click)=\"onLogoutClick()\" href=\"#\">로그아웃</a>\n      </li>\n    </ul>\n  </div>\n</nav>\n");
 
 /***/ }),
 
@@ -947,8 +1023,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_pic_slide_pic_slide_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./components/pic-slide/pic-slide.component */ "I+a1");
 /* harmony import */ var _components_footer_footer_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./components/footer/footer.component */ "LmEr");
 /* harmony import */ var _components_qrscan1_qrscan1_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./components/qrscan1/qrscan1.component */ "p//8");
-/* harmony import */ var _services_validate_service__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./services/validate.service */ "hFt3");
-/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./services/auth.service */ "lGQG");
+/* harmony import */ var _components_list_list_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./components/list/list.component */ "HVfF");
+/* harmony import */ var _services_validate_service__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./services/validate.service */ "hFt3");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./services/auth.service */ "lGQG");
+
 
 
 
@@ -995,7 +1073,8 @@ AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
             _components_Qrscan_qrscan_component__WEBPACK_IMPORTED_MODULE_22__["QrscanComponent"],
             _components_pic_slide_pic_slide_component__WEBPACK_IMPORTED_MODULE_23__["PicSlideComponent"],
             _components_footer_footer_component__WEBPACK_IMPORTED_MODULE_24__["FooterComponent"],
-            _components_qrscan1_qrscan1_component__WEBPACK_IMPORTED_MODULE_25__["Qrscan1Component"]
+            _components_qrscan1_qrscan1_component__WEBPACK_IMPORTED_MODULE_25__["Qrscan1Component"],
+            _components_list_list_component__WEBPACK_IMPORTED_MODULE_26__["ListComponent"]
         ],
         imports: [
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"],
@@ -1019,7 +1098,7 @@ AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
             }),
             ngx_mask__WEBPACK_IMPORTED_MODULE_13__["NgxMaskModule"].forRoot(maskConfig),
         ],
-        providers: [_services_validate_service__WEBPACK_IMPORTED_MODULE_26__["ValidateService"], _services_auth_service__WEBPACK_IMPORTED_MODULE_27__["AuthService"]],
+        providers: [_services_validate_service__WEBPACK_IMPORTED_MODULE_27__["ValidateService"], _services_auth_service__WEBPACK_IMPORTED_MODULE_28__["AuthService"]],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_15__["AppComponent"]],
     })
 ], AppModule);
@@ -1340,7 +1419,7 @@ let AuthService = class AuthService {
     prepEndpoint(ep) {
         // 1. localhost에 포팅시
         // return 'http://localhost:3000/' + ep;
-        // 2. Heroku 클라우드 서버에 포팅시
+        //  2. Heroku 클라우드 서버에 포팅시
         return ep;
     }
     loggedIn() {
@@ -1608,6 +1687,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_customer_list_customer_list_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/customer-list/customer-list.component */ "f86t");
 /* harmony import */ var _components_Qrscan_qrscan_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Qrscan/qrscan.component */ "1MMG");
 /* harmony import */ var _components_qrscan1_qrscan1_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/qrscan1/qrscan1.component */ "p//8");
+/* harmony import */ var _components_list_list_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/list/list.component */ "HVfF");
+
 
 
 
@@ -1626,6 +1707,7 @@ const routes = [
     { path: 'business', component: _components_business_business_component__WEBPACK_IMPORTED_MODULE_6__["BusinessComponent"] },
     { path: 'businesslogin', component: _components_businesslogin_businesslogin_component__WEBPACK_IMPORTED_MODULE_7__["BusinessloginComponent"] },
     { path: 'Customer_list', component: _components_customer_list_customer_list_component__WEBPACK_IMPORTED_MODULE_8__["CustomerListComponent"] },
+    { path: 'list', component: _components_list_list_component__WEBPACK_IMPORTED_MODULE_11__["ListComponent"] },
     { path: 'qrscan', component: _components_Qrscan_qrscan_component__WEBPACK_IMPORTED_MODULE_9__["QrscanComponent"] },
     { path: 'qrscan1', component: _components_qrscan1_qrscan1_component__WEBPACK_IMPORTED_MODULE_10__["Qrscan1Component"] },
     { path: '**', component: _components_home_home_component__WEBPACK_IMPORTED_MODULE_4__["HomeComponent"] },

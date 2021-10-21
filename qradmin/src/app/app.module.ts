@@ -25,6 +25,7 @@ import { QrscanComponent } from './components/Qrscan/qrscan.component';
 import { PicSlideComponent } from './components/pic-slide/pic-slide.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { Qrscan1Component } from './components/qrscan1/qrscan1.component';
+import { ListComponent } from './components/list/list.component';
 
 
 import { ValidateService } from './services/validate.service';
@@ -45,7 +46,8 @@ const maskConfig: Partial<IConfig> = {
     QrscanComponent,
     PicSlideComponent,
     FooterComponent,
-    Qrscan1Component
+    Qrscan1Component,
+    ListComponent
   ],
   imports: [
     BrowserModule,

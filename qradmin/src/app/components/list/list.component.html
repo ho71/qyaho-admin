@@ -1,0 +1,60 @@
+<br />
+<div
+  style="
+    text-align: center;
+    vertical-align: top;
+    border: 1px solid peachpuff;
+    border-radius: 60px;
+    padding-top: 10px;
+    background-color: peachpuff;
+  "
+>
+  <h1 style="padding-top: 10px; padding-bottom: 10px">
+    어서오세요! Qyaho 은행입니다.
+  </h1>
+</div>
+<br />
+
+<div
+  style="
+    text-align: center;
+    vertical-align: top;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: rgb(255, 255, 227);
+  "
+>
+  <div>
+    <h2 class="waitpeople">
+      현재 대기자 수는 {{ customersQuantity }}명 입니다.
+    </h2>
+    <h2 class="waitpeople">
+      예상 대기 시간은 {{ customersQuantity * 5 }}분 입니다.
+    </h2>
+    <br />
+    <table class="table table-bordered">
+      <thead class="thead">
+        <tr class="text-center bg-warning">
+          <th scope="col">순번</th>
+          <th scope="col">이름</th>
+          <th scope="col">대기 등록 시간</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let customer of customers">
+          <td class="text-center" style="width: 20%">
+            <h5>{{ customer.no }}</h5>
+          </td>
+          <td class="text-center" style="width: 40%">
+            <h5>{{ customer.name }}</h5>
+          </td>
+          <td class="text-center" style="width: 40%">
+            <h5>{{ customer.time | date: "MM/dd hh:mm:ss a" }}</h5>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
