@@ -40,7 +40,7 @@ export class CustomerNumService {
   }
 
   deleteCustomerNum(id: string) {
-    const deleteCustomer = this.prepEndpoint('cusnum/cus_nums');
+    const deleteCustomer = this.prepEndpoint('cusnum/cus_nums/');
     return this.http
       .delete<Cus_num>(deleteCustomer + `${id}`, httpOptions)
       .subscribe();
