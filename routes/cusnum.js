@@ -55,7 +55,7 @@ router.post("/cus_nums1", async (req, res) => {
   username = req.body.username;
   nam = req.body.name;
   const nno = await Cus_num.findOne().sort({ no: 1 }).limit(1);
-  nid = await Cus_num.findOne({ username : username }); //cus num db에서 같은 username의 쿼리문 찾기
+  nid = await Cus_num.findOne({ username: username }); //cus num db에서 같은 username의 쿼리문 찾기
 
   if (nid !== null) {
     if (nno.no == nid.no) {
@@ -82,8 +82,8 @@ router.post("/cus_nums1", async (req, res) => {
   }
 });
 
-router.delete("/remove", async (req, res) => {
-  await Cus_num.deleteMany();
+router.delete("/cus_nums/:id", async (req, res) => {
+  await Cus_num.findByIdAndDelete(req.params.id);
   res.json({
     message: "ok",
   });
