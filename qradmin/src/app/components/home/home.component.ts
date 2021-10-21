@@ -37,6 +37,7 @@ export class HomeComponent implements OnInit {
       this.customer1Service.getCustomerNums().subscribe((data) => {
         this.customers = data;
         this.customersQuantity = data.length;
+        console.log(this.customers);
       });
     }, 1000);
   }

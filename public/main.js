@@ -120,7 +120,6 @@ let QrscanComponent = class QrscanComponent {
             if (qrcode && qrcode.data.length !== 0) {
                 const par = JSON.parse(qrcode.data);
                 par.no = this.no;
-                console.log(this.no);
                 qrcode.data = JSON.stringify(par);
                 this.manageSubmit(qrcode.data);
                 setTimeout(() => {
@@ -1075,7 +1074,7 @@ let CustomerNumService = class CustomerNumService {
         return this.http.post(addCustomer1, Cus_num, httpOptions);
     }
     deleteCustomerNum(id) {
-        const deleteCustomer = this.prepEndpoint('cusnum/cus_nums');
+        const deleteCustomer = this.prepEndpoint('cusnum/cus_nums/');
         return this.http
             .delete(deleteCustomer + `${id}`, httpOptions)
             .subscribe();
@@ -1152,6 +1151,7 @@ let CustomerListComponent = class CustomerListComponent {
             confirmButtonColor: '#d33',
             cancelButtonColor: '#3085d6',
             confirmButtonText: '확인',
+            cancelButtonText: '취소',
         }).then((result) => {
             if (result.value) {
                 this.customersService.deleteCustomer(id);
