@@ -109,7 +109,6 @@ export class QrscanComponent {
       if (qrcode && qrcode.data.length !== 0) {
         const par = JSON.parse(qrcode.data);
         par.no = this.no;
-        console.log(this.no);
         qrcode.data = JSON.stringify(par);
         this.manageSubmit(qrcode.data);
         setTimeout(() => {

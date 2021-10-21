@@ -82,6 +82,13 @@ router.post("/cus_nums1", async (req, res) => {
   }
 });
 
+router.delete("/remove", async (req, res) => {
+  await Cus_num.deleteMany();
+  res.json({
+    message: "ok",
+  });
+});
+
 router.delete("/:id", async (req, res) => {
   await Cus_num.findByIdAndDelete(req.params.id);
   res.json({
