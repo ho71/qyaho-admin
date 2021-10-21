@@ -49,12 +49,8 @@ let QrscanComponent = class QrscanComponent {
             sweetalert2__WEBPACK_IMPORTED_MODULE_6___default.a.fire({
                 title: '카메라',
                 text: '작동 중지',
+                timer: 2000,
                 icon: 'success',
-                confirmButtonText: '확인',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.reload();
-                }
             });
         }
         else {
@@ -64,7 +60,6 @@ let QrscanComponent = class QrscanComponent {
                 text: '작동 시작',
                 timer: 2000,
                 icon: 'success',
-                confirmButtonText: '확인',
             });
         } //swal
     }
@@ -140,7 +135,7 @@ let QrscanComponent = class QrscanComponent {
                     title: data.title,
                     text: data.msg,
                     icon: 'success',
-                    confirmButtonText: '확인',
+                    timer: 2000,
                 });
                 this.no += 1;
             }
@@ -149,7 +144,7 @@ let QrscanComponent = class QrscanComponent {
                     title: data.title,
                     text: data.msg,
                     icon: 'error',
-                    confirmButtonText: '확인',
+                    timer: 2000,
                 });
             }
         });
@@ -1506,12 +1501,8 @@ let Qrscan1Component = class Qrscan1Component {
             sweetalert2__WEBPACK_IMPORTED_MODULE_6___default.a.fire({
                 title: '카메라',
                 text: '작동 중지',
+                timer: 2000,
                 icon: 'success',
-                confirmButtonText: '확인',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.reload();
-                }
             });
         }
         else {
@@ -1521,7 +1512,6 @@ let Qrscan1Component = class Qrscan1Component {
                 text: '작동 시작',
                 timer: 2000,
                 icon: 'success',
-                confirmButtonText: '확인',
             });
         } //swal
     }
@@ -1594,7 +1584,7 @@ let Qrscan1Component = class Qrscan1Component {
                     title: data.title,
                     text: data.msg,
                     icon: 'success',
-                    confirmButtonText: '확인',
+                    timer: 2000,
                 });
             }
             else {
@@ -1602,7 +1592,7 @@ let Qrscan1Component = class Qrscan1Component {
                     title: data.title,
                     text: data.msg,
                     icon: 'error',
-                    confirmButtonText: '확인',
+                    timer: 2000,
                 });
             }
         });

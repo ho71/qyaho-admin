@@ -24,12 +24,8 @@ export class Qrscan1Component {
       Swal.fire({
         title: '카메라',
         text: '작동 중지',
+        timer: 2000,
         icon: 'success',
-        confirmButtonText: '확인',
-      }).then((result) => {
-        if (result.isConfirmed) {
-          window.location.reload();
-        }
       });
     } else {
       this.startVideo();
@@ -38,7 +34,6 @@ export class Qrscan1Component {
         text: '작동 시작',
         timer: 2000,
         icon: 'success',
-        confirmButtonText: '확인',
       });
     } //swal
   }
@@ -125,14 +120,14 @@ export class Qrscan1Component {
           title: data.title,
           text: data.msg,
           icon: 'success',
-          confirmButtonText: '확인',
+          timer: 2000,
         });
       } else {
         Swal.fire({
           title: data.title,
           text: data.msg,
           icon: 'error',
-          confirmButtonText: '확인',
+          timer: 2000,
         });
       }
     });
