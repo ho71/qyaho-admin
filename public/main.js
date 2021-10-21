@@ -51,6 +51,7 @@ let QrscanComponent = class QrscanComponent {
                 text: '작동 중지',
                 timer: 2000,
                 icon: 'success',
+                showConfirmButton: false,
             });
         }
         else {
@@ -60,6 +61,7 @@ let QrscanComponent = class QrscanComponent {
                 text: '작동 시작',
                 timer: 2000,
                 icon: 'success',
+                showConfirmButton: false,
             });
         } //swal
     }
@@ -67,7 +69,6 @@ let QrscanComponent = class QrscanComponent {
         navigator.mediaDevices
             .enumerateDevices()
             .then((mediaDeviceInfoList) => {
-            console.log(mediaDeviceInfoList);
             const videoDevices = mediaDeviceInfoList.filter((deviceInfo) => deviceInfo.kind === 'videoinput');
             if (videoDevices.length === 0) {
                 throw new Error('no video input devices');
@@ -136,6 +137,7 @@ let QrscanComponent = class QrscanComponent {
                     text: data.msg,
                     icon: 'success',
                     timer: 2000,
+                    showConfirmButton: false,
                 });
                 this.no += 1;
             }
@@ -145,6 +147,7 @@ let QrscanComponent = class QrscanComponent {
                     text: data.msg,
                     icon: 'error',
                     timer: 2000,
+                    showConfirmButton: false,
                 });
             }
         });
@@ -1503,6 +1506,7 @@ let Qrscan1Component = class Qrscan1Component {
                 text: '작동 중지',
                 timer: 2000,
                 icon: 'success',
+                showConfirmButton: false,
             });
         }
         else {
@@ -1512,6 +1516,7 @@ let Qrscan1Component = class Qrscan1Component {
                 text: '작동 시작',
                 timer: 2000,
                 icon: 'success',
+                showConfirmButton: false,
             });
         } //swal
     }
@@ -1519,7 +1524,6 @@ let Qrscan1Component = class Qrscan1Component {
         navigator.mediaDevices
             .enumerateDevices()
             .then((mediaDeviceInfoList) => {
-            console.log(mediaDeviceInfoList);
             const videoDevices = mediaDeviceInfoList.filter((deviceInfo) => deviceInfo.kind === 'videoinput');
             if (videoDevices.length === 0) {
                 throw new Error('no video input devices');
@@ -1585,6 +1589,7 @@ let Qrscan1Component = class Qrscan1Component {
                     text: data.msg,
                     icon: 'success',
                     timer: 2000,
+                    showConfirmButton: false,
                 });
             }
             else {
@@ -1593,6 +1598,7 @@ let Qrscan1Component = class Qrscan1Component {
                     text: data.msg,
                     icon: 'error',
                     timer: 2000,
+                    showConfirmButton: false,
                 });
             }
         });

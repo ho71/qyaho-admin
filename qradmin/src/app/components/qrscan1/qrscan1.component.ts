@@ -14,9 +14,7 @@ export class Qrscan1Component {
 
   stream: MediaStream | undefined;
 
-  constructor(
-    private customer1Service: CustomerNumService
-  ) {}
+  constructor(private customer1Service: CustomerNumService) {}
 
   toggleVideoMedia(): void {
     if (this.isActive()) {
@@ -26,6 +24,7 @@ export class Qrscan1Component {
         text: '작동 중지',
         timer: 2000,
         icon: 'success',
+        showConfirmButton: false,
       });
     } else {
       this.startVideo();
@@ -34,6 +33,7 @@ export class Qrscan1Component {
         text: '작동 시작',
         timer: 2000,
         icon: 'success',
+        showConfirmButton: false,
       });
     } //swal
   }
@@ -42,7 +42,6 @@ export class Qrscan1Component {
     navigator.mediaDevices
       .enumerateDevices()
       .then((mediaDeviceInfoList) => {
-        console.log(mediaDeviceInfoList);
         const videoDevices = mediaDeviceInfoList.filter(
           (deviceInfo) => deviceInfo.kind === 'videoinput'
         );
@@ -121,6 +120,7 @@ export class Qrscan1Component {
           text: data.msg,
           icon: 'success',
           timer: 2000,
+          showConfirmButton: false,
         });
       } else {
         Swal.fire({
@@ -128,6 +128,7 @@ export class Qrscan1Component {
           text: data.msg,
           icon: 'error',
           timer: 2000,
+          showConfirmButton: false,
         });
       }
     });

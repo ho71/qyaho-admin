@@ -11,7 +11,6 @@ router.get("/cus_nums", async (req, res) => {
 
 router.post("/cus_nums", async (req, res) => {
   const customer = new Cus_num(req.body);
-  console.log(customer);
   ntime = new Date().getTime();
   qrtime = req.body.time; //qr
   username = req.body.username; //qr
@@ -85,7 +84,7 @@ router.post("/cus_nums1", async (req, res) => {
 router.delete("/cus_nums/:id", async (req, res) => {
   await Cus_num.findByIdAndDelete(req.params.id);
   res.json({
-    message: "ok",
+    message: "확인",
   });
 });
 
